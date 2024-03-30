@@ -13,6 +13,7 @@ import { Route, Routes } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SideBar from "./pages/Branch/Components/SideBar.jsx";
 import Reviews from "./pages/Branch/Components/Reviews.jsx";
+import Messages from "./pages/Branch/Components/Messages.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Stations from "./pages/Branch/Components/Stations.jsx";
 
@@ -50,6 +51,7 @@ const App = () => {
             <Route path="/branch/stations" element={<Main />} />
             <Route path="/branch/rides" element={<Rides />} />
             <Route path="/branch/reviews" element={<Reviews />} />
+            <Route path="/branch/messages" element={<Messages />} />
           </Routes>
         </div>
       )}

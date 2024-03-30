@@ -220,3 +220,63 @@ a {
   padding: 10px 20px 20px 20px;
   color: var(--gray-color);
 }
+
+.messages-page {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+@media (max-width: 767px) {
+  .messages-page {
+    grid-template-columns: minmax(200px, 1fr);
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 10px;
+  }
+}
+.messages-page .message {
+  overflow: hidden;
+}
+.messages-page .message .actions button {
+  width: 85px;
+  font-size: 15px;
+  padding: 2px 10px;
+  border-radius: 5px;
+  color: var(--white-color);
+  border: none;
+  background-color: var(--green-color);
+}
+.messages-page .message .actions svg {
+  width: 15px;
+  height: 15px;
+  transition: color 0.2s ease-in;
+}
+.messages-page .message .actions svg:hover {
+  cursor: pointer;
+  color: var(--red-color);
+}
+.messages-page .message .info {
+  font-size: 13px;
+  margin-bottom: 20px;
+  padding: 10px 20px 10px 20px;
+  color: var(--gray-color);
+}
+.messages-page .message .reply {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px 10px 20px;
+}
+.messages-page .message .reply input {
+  flex: 1;
+  border-radius: 5px;
+  padding: 6px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+}
+.messages-page .message .reply svg {
+  width: 20px;
+  height: 20px;
+  transition: color 0.2s ease-in;
+}
+.messages-page .message .reply svg:hover {
+  cursor: pointer;
+  color: var(--green-color);
+}
