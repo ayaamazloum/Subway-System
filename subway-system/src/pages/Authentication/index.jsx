@@ -14,8 +14,7 @@ const Authentication = () => {
             <img className='auth-logo' src={logo} />
             <div className='flex row gap-50 mt-30'>
                 <button className={`auth-tab lexend-text sm-text white-text secondary-bg  ${isSignin && 'active-tab'}`}
-                    onClick={() => setIsSignin(true)}>
-                    SIGN IN</button>
+                    onClick={() => setIsSignin(true)}>SIGN IN</button>
                 <button className={`auth-tab lexend-text sm-text white-text secondary-bg  ${!isSignin && 'active-tab'}`}
                     onClick={() => setIsSignin(false)}>SIGN UP</button>
             </div>
