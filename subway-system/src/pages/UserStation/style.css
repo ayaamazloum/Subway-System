@@ -27,6 +27,10 @@
     gap: 50px;
 }
 
+.small-gap {
+    gap: 5px;
+}
+
 .button-div button {
     border: none;
     padding: 5px 10px;
