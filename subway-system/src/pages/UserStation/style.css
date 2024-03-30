@@ -9,3 +9,29 @@
     padding: 10px 30px;
 }
 
+.search-icon {
+    margin-left: 10px;
+}
+
+.station-card {
+    width: fit-content;
+    padding: 50px;
+    
+}
+
+.icons-div {
+    justify-content: space-between;
+}
+
+.gap {
+    gap: 50px;
+}
+
+.button-div button {
+    border: none;
+    padding: 5px 10px;
+    background-color: #35B368;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
