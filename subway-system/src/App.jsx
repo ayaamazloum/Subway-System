@@ -9,14 +9,17 @@ const App = () => {
   return (
     <>
       <div className="d-flex page">
-        {BranchRoutes.includes(location.pathname)}
-        <SideBar />
-        <Routes>
-          <Route path="/branch/stations" element={<Main />} />
-          <Route path="/branch/rides" element={<Rides />} />
-          {/* <Route path="/branch/reviews" element={<Reviews />} />
-        <Route path="/branch/messages" element={<Messages />} /> */}
-        </Routes>
+        {BranchRoutes.includes(location.pathname) && (
+          <>
+            <SideBar />
+            <Routes>
+              <Route path="/branch/stations" element={<Main />} />
+              <Route path="/branch/rides" element={<Rides />} />
+              {/* <Route path="/branch/reviews" element={<Reviews />} />
+      <Route path="/branch/messages" element={<Messages />} /> */}
+            </Routes>
+          </>
+        )}
       </div>
     </>
   );
