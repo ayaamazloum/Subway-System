@@ -24,7 +24,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app">
+    <div className="app lexend-text">
       {UserRoutes.includes(location.pathname) && (
           <div className="app">
             <Routes>
