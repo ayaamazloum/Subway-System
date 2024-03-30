@@ -1,0 +1,11 @@
+
+.input-container {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+}
+
+.search-input {
+    padding: 10px 30px;
+}
+
