@@ -5,8 +5,8 @@ import Authentication from "./pages/Authentication";
 import Main from "./pages/Branch/index.jsx";
 import Rides from "./pages/Branch/Components/Rides.jsx";
 import NavBar from "./pages/Navbar/index.jsx";
-import BranchRoutes from "./core/BranchRoutes.jsx";
-import UserRoutes from "./core/UserRoutes.jsx";
+import BranchRoutes from "./core/routes/BranchRoutes.jsx";
+import UserRoutes from "./core/routes/UserRoutes.jsx";
 import Home from "./pages/Home";
 
 import { Route, Routes } from "react-router-dom";

@@ -1,5 +1,5 @@
 import React from "react";
-import "../Common/utilities.css";
+import "./Styles/utilities.css";
 import "./Styles/index.css";
 import Layout from "./Components/Layout";
 import Stations from "./Components/Stations";
