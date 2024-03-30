@@ -13,10 +13,9 @@ const Authentication = () => {
         <div className='auth-container flex column center gap-50 half-width secondary-bg'>
             <img className='auth-logo' src={logo} />
             <div className='flex row gap-50 mt-30'>
-                <button className='auth-tab lexend-text sm-text white-text secondary-bg active-tab'
-                    onClick={() => setIsSignin(true)}>
-                    SIGN IN</button>
-                <button className='auth-tab lexend-text sm-text white-text secondary-bg'
+                <button className={`auth-tab lexend-text sm-text white-text secondary-bg  ${isSignin && 'active-tab'}`}
+                    onClick={() => setIsSignin(true)}>SIGN IN</button>
+                <button className={`auth-tab lexend-text sm-text white-text secondary-bg  ${!isSignin && 'active-tab'}`}
                     onClick={() => setIsSignin(false)}>SIGN UP</button>
             </div>
             {isSignin ? <SigninForm/> : <SignupForm/>}
