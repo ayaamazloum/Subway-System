@@ -9,6 +9,8 @@ import BranchRoutes from "./core/routes/BranchRoutes.jsx";
 import UserRoutes from "./core/routes/UserRoutes.jsx";
 import Home from "./pages/Home";
 
+import UserStation from "./pages/UserStation/index.jsx";
+
 import { Route, Routes } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SideBar from "./pages/Branch/Components/SideBar.jsx";
@@ -38,6 +40,7 @@ const App = () => {
         <Route path="/auth" element={<Authentication />}></Route>
         <Route path="/stations" element={<Stations />} />
         <Route path="/rides" element={<Rides />} />
+        <Route path="/userstation" element={<UserStation />} />
       </Routes>
       
       {BranchRoutes.includes(location.pathname) && (
