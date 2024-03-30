@@ -8,9 +8,9 @@ const App = () => {
   const location = useLocation();
   return (
     <>
-      <div className="d-flex page">
-        {BranchRoutes.includes(location.pathname) && (
-          <>
+      {BranchRoutes.includes(location.pathname) && (
+        <>
+          <div className="d-flex page">
             <SideBar />
             <Routes>
               <Route path="/branch/stations" element={<Main />} />
@@ -18,9 +18,9 @@ const App = () => {
               {/* <Route path="/branch/reviews" element={<Reviews />} />
       <Route path="/branch/messages" element={<Messages />} /> */}
             </Routes>
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

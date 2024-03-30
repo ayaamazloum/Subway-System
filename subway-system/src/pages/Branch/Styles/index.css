@@ -110,25 +110,14 @@ a {
 }
 .stations-page .station .info {
   font-size: 13px;
-}
-
-.stations-page .station .info ul li::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  display: block;
-  background-color: white;
-  border-radius: 50%;
-  margin-right: 15px;
-  z-index: 1;
-}
-.stations-page .station .info ul li.done::before {
-  background-color: var(--gray-color);
+  margin-bottom: 20px;
 }
 .stations-page .station .info .location {
   padding-right: 55px;
   display: flex;
   align-items: center;
+  align-self: flex-end;
+  justify-content: center;
   color: rgba(0, 0, 0, 0.48);
   gap: 10px;
 }
@@ -171,25 +160,14 @@ a {
 }
 .rides-page .ride .info {
   font-size: 13px;
+  margin-bottom: 20px;
 }
 
-.rides-page .ride .info ul li::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  display: block;
-  background-color: white;
-  border-radius: 50%;
-  margin-right: 15px;
-  z-index: 1;
-}
-.rides-page .ride .info ul li.done::before {
-  background-color: var(--gray-color);
-}
 .rides-page .ride .info .location {
   padding-right: 55px;
   display: flex;
   align-items: center;
+  align-self: flex-end;
   color: rgba(0, 0, 0, 0.48);
   gap: 10px;
 }

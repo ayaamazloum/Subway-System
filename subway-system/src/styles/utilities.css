@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+}
+
+.app {
+  display: flex;
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.page {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.flex {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.space-evenly {
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.half-height {
+  height: 50%;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.thin {
+  font-weight: 200;
+}
+
+.lg-text {
+  font-size: 32px;
+}
+
+.md-text {
+  font-size: 24px;
+}
+
+.sm-text {
+  font-size: 18px;
+}
+
+.xsm-text {
+  font-size: 14px;
+}
+
+.rounded {
+  border-radius: 10px;
+}
+
+.semi-rounded {
+  border-radius: 5px;
+}
