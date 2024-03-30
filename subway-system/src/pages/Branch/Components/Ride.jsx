@@ -8,7 +8,7 @@ const Ride = () => {
   return (
     <div className="ride  bg-white rad-6 p-relative">
       <div className="p-20 between-flex">
-        <h4 className="m-0 fs-18">Name</h4>
+        <h4 className="m-0 fs-18">ID</h4>
         <div className="center-flex gap-5 actions">
           <button>Status</button>
           <FontAwesomeIcon icon={faPenToSquare} />
