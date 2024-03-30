@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 :root {
   --blue-color: #2034e3;
   --blue-color-alt: #0d69d5;
@@ -5,6 +6,7 @@
   --green-color: #35b368;
   --red-color: #ed1313;
   --gray-color: #888;
+  --black-color: #282828;
   --white-color: #fff;
 }
 * {
@@ -15,7 +17,8 @@
 }
 body {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  color: var(--black-color);
+  font-family: "Lexend", sans-serif;
   background-color: #f1f5f9;
 }
 a {
@@ -40,12 +43,17 @@ a {
   -ms-transition: 0.3;
   -o-transition: 0.3;
 }
+.sidebar ul li a svg {
+  width: 18px;
+  height: 18px;
+}
 .sidebar ul li a:hover,
 .sidebar ul li a.active {
+  cursor: pointer;
   background-color: #f6f6f6;
 }
 .sidebar ul li a span {
-  font-size: 14px;
+  font-size: 18px;
   margin-left: 10px;
 }
 @media (max-width: 767px) {
@@ -84,7 +92,8 @@ a {
 }
 .stations-page .station .actions button {
   width: 85px;
-  height: 18px;
+  font-size: 15px;
+  padding: 2px 10px;
   border-radius: 5px;
   color: var(--white-color);
   border: none;
@@ -124,6 +133,67 @@ a {
   gap: 10px;
 }
 .stations-page .station .info .location svg {
+  width: 15px;
+  height: 15px;
+}
+
+.rides-page {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+@media (max-width: 767px) {
+  .rides-page {
+    grid-template-columns: minmax(200px, 1fr);
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 10px;
+  }
+}
+.rides-page .ride {
+  overflow: hidden;
+}
+.rides-page .ride .actions button {
+  width: 85px;
+  font-size: 15px;
+  padding: 2px 10px;
+  border-radius: 5px;
+  color: var(--white-color);
+  border: none;
+  background-color: var(--green-color);
+}
+.rides-page .ride .actions svg {
+  width: 15px;
+  height: 15px;
+  transition: color 0.2s ease-in;
+}
+.rides-page .ride .actions svg:hover {
+  cursor: pointer;
+  color: var(--blue-color);
+}
+.rides-page .ride .info {
+  font-size: 13px;
+}
+
+.rides-page .ride .info ul li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  display: block;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 15px;
+  z-index: 1;
+}
+.rides-page .ride .info ul li.done::before {
+  background-color: var(--gray-color);
+}
+.rides-page .ride .info .location {
+  padding-right: 55px;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.48);
+  gap: 10px;
+}
+.rides-page .ride .info .location svg {
   width: 15px;
   height: 15px;
 }

@@ -1,18 +1,14 @@
 import React from "react";
 import "../Common/utilities.css";
 import "./Styles/index.css";
-import SideBar from "./Components/SideBar";
+import Layout from "./Components/Layout";
 import Stations from "./Components/Stations";
+import Rides from "./Components/Rides";
 const Index = () => {
   return (
-    <>
-      <div className="page d-flex">
-        <SideBar />
-        <div className="content w-full">
-          <Stations />
-        </div>
-      </div>
-    </>
+    <div className="content w-full">
+      <Stations />
+    </div>
   );
 };
 
