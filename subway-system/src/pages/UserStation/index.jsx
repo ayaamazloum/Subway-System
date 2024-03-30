@@ -12,7 +12,7 @@ const UserStation = () => {
                 <FontAwesomeIcon icon={faSearch} className="search-icon" />
                 <input type="text" placeholder="Beirut" className="search-input"/>
             </div>
-            <div>
+            <div className="padding">
                 <h2>Nearest Stations</h2>
                 <div className="flex space-between">
                     <StationCard/>
@@ -22,7 +22,7 @@ const UserStation = () => {
                 </div>
                 
             </div>
-            <div>
+            <div className="padding">
                 <h2>Highest Rating Stations</h2>
                 <div className="flex space-between">
                     <StationCard/>
@@ -31,7 +31,7 @@ const UserStation = () => {
                     <StationCard/>
                 </div>
             </div>
-            <div>
+            <div className="padding">
                 <h2>All Stations</h2>
                 <div className="flex space-between">
                     <StationCard/>
