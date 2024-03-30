@@ -1,4 +1,4 @@
-import 'style.css';
+import './style.css';
 
 const Authentication = () => {
     return <div className='auth-page full-width full-height'>
