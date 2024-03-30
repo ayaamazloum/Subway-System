@@ -5,7 +5,7 @@
   --orange-color: #f59e0b;
   --green-color: #35b368;
   --red-color: #ed1313;
-  --gray-color: #888;
+  --gray-color: #939393;
   --black-color: #282828;
   --white-color: #fff;
 }
@@ -112,6 +112,9 @@ a {
   font-size: 13px;
   margin-bottom: 20px;
 }
+.stations-page .station .info > div {
+  padding-left: 20px;
+}
 .stations-page .station .info .location {
   padding-right: 55px;
   display: flex;
@@ -162,6 +165,9 @@ a {
   font-size: 13px;
   margin-bottom: 20px;
 }
+.rides-page .ride .info > div {
+  padding-left: 20px;
+}
 
 .rides-page .ride .info .location {
   padding-right: 55px;
@@ -174,4 +180,43 @@ a {
 .rides-page .ride .info .location svg {
   width: 15px;
   height: 15px;
+}
+
+.reviews-page {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+@media (max-width: 767px) {
+  .reviews-page {
+    grid-template-columns: minmax(200px, 1fr);
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 10px;
+  }
+}
+.reviews-page .review {
+  overflow: hidden;
+}
+.reviews-page .review .actions button {
+  width: 85px;
+  font-size: 15px;
+  padding: 2px 10px;
+  border-radius: 5px;
+  color: var(--white-color);
+  border: none;
+  background-color: var(--green-color);
+}
+.reviews-page .review .actions svg {
+  width: 15px;
+  height: 15px;
+  transition: color 0.2s ease-in;
+}
+.reviews-page .review .actions svg:hover {
+  cursor: pointer;
+  color: var(--red-color);
+}
+.reviews-page .review .info {
+  font-size: 13px;
+  margin-bottom: 20px;
+  padding: 10px 20px 20px 20px;
+  color: var(--gray-color);
 }
