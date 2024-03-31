@@ -10,6 +10,10 @@ import AdminRoutes from "./core/routes/AdminRoutes.jsx";
 import UserRoutes from "./core/routes/UserRoutes.jsx";
 import Home from "./pages/Home";
 
+import UserStation from "./pages/UserStation/index.jsx";
+import UserRide from "./pages/UserRide/index.jsx";
+import UserProfile from "./pages/UserProfile/index.jsx";
+
 import { Route, Routes } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SideBar from "./pages/Branch/Components/SideBar.jsx";
@@ -49,6 +53,9 @@ const App = () => {
         <Route path="/branchAuth" element={<BranchAuthentication />}></Route>
         <Route path="/stations" element={<Stations />} />
         <Route path="/rides" element={<Rides />} />
+        <Route path="/userstation" element={<UserStation />} />
+        <Route path="/userride" element={<UserRide />} />
+        <Route path="/userprofile" element={<UserProfile />} />
       </Routes>
 
       {BranchRoutes.includes(location.pathname) && (

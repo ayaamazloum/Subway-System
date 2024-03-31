@@ -1,0 +1,49 @@
+
+.input-container {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+}
+
+.search-input {
+    padding: 10px 30px;
+}
+
+.search-icon {
+    margin-left: 10px;
+}
+
+.station-card {
+    width: fit-content;
+    padding: 50px;
+    
+}
+
+.icons-div {
+    justify-content: space-between;
+}
+
+.gap {
+    gap: 50px;
+}
+
+.small-gap {
+    gap: 5px;
+}
+
+.button-div button {
+    border: none;
+    padding: 10px 20px;
+    background-color: #35B368;
+    color: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.padding {
+    padding: 50px
+}
+
+.padding-bottom {
+    padding-bottom: 50px;
+}
