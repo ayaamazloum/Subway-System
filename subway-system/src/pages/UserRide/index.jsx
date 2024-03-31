@@ -2,6 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
+import "./style.css";
+
 const UserRide = () => {
 
     return (
@@ -11,8 +13,14 @@ const UserRide = () => {
                     <h1>Station 1</h1>
                 </div>
                 <div className="flex center">
-                    <FontAwesomeIcon icon={faLocationDot} className="primary-text"/>
+                    <FontAwesomeIcon icon={faLocationDot} className="primary-text adj-size"/>
                     <h1>Beirut</h1>
+                </div>
+            </div>
+            <div>
+                <h3>List of Rides</h3>
+                <div>
+                    
                 </div>
             </div>
 
