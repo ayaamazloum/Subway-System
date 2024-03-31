@@ -179,3 +179,56 @@ a {
 .managers-page .manager .info p {
   color: var(--gray-color);
 }
+
+.coinrequests-page {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+@media (max-width: 767px) {
+  .coinrequests-page {
+    grid-template-columns: minmax(200px, 1fr);
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 10px;
+  }
+}
+.coinrequests-page .coinrequest {
+  overflow: hidden;
+}
+.coinrequests-page .coinrequest .actions button {
+  width: 85px;
+  font-size: 15px;
+  padding: 2px 10px;
+  border-radius: 5px;
+  color: var(--white-color);
+  border: none;
+  background-color: var(--green-color);
+}
+.coinrequests-page .coinrequest .actions svg {
+  width: 15px;
+  height: 15px;
+  transition: color 0.2s ease-in;
+}
+.coinrequests-page .coinrequest .actions .edit:hover {
+  cursor: pointer;
+  color: var(--blue-color);
+}
+.coinrequests-page .coinrequest .actions .delete:hover {
+  cursor: pointer;
+  color: var(--red-color);
+}
+.coinrequests-page .coinrequest .info {
+  font-size: 13px;
+  margin-bottom: 10px;
+  padding: 20px;
+  gap: 5px;
+}
+.coinrequests-page .coinrequest .info .amount svg {
+  color: var(--green-color);
+}
+.coinrequests-page .coinrequest .info .status button {
+  padding: 3px 20px;
+  border-radius: 5px;
+  background-color: var(--orange-color);
+  color: var(--white-color);
+  font-size: 14px;
+}

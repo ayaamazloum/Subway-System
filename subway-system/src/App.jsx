@@ -16,6 +16,7 @@ import SideBar from "./pages/Branch/Components/SideBar.jsx";
 import AdminSideBar from "./pages/Admin/Components/SideBar.jsx";
 import Admin from "./pages/Admin/index.jsx";
 import AdminManagers from "./pages/Admin/Components/Managers.jsx";
+import CoinRequests from "./pages/Admin/Components/CoinRequests.jsx";
 import Reviews from "./pages/Branch/Components/Reviews.jsx";
 import Messages from "./pages/Branch/Components/Messages.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -67,7 +68,7 @@ const App = () => {
           <Routes>
             <Route path="/admin/overview" element={<Admin />} />
             <Route path="/admin/branches" element={<AdminManagers />} />
-            <Route path="/admin/coinrequests" element={<Reviews />} />
+            <Route path="/admin/coinrequests" element={<CoinRequests />} />
           </Routes>
         </div>
       )}
