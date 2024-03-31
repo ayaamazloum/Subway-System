@@ -2,9 +2,11 @@
   --blue-color: #2034e3;
   --blue-color-alt: #0d69d5;
   --orange-color: #f59e0b;
-  --green-color: #35b368;
+  --green-color: #35B368;
   --red-color: #ed1313;
-  --gray-color: #888;
+  --gray-color: #939393;
+  --black-color: #282828;
+  --white-color: #fff;
 }
 .d-flex {
   display: flex;
@@ -26,6 +28,9 @@
 }
 .gap-20 {
   gap: 20px;
+}
+.gap-50 {
+  gap: 50px;
 }
 .d-block {
   display: block;
