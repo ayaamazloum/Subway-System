@@ -90,6 +90,11 @@
   z-index: 1;
 }
 
+.download-buttons {
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 .download-btn {
   padding: 15px 30px;
   z-index: 1;
