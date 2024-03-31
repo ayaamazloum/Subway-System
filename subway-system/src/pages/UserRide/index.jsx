@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import UserRideCard from "./components/UserRideCard";
 
 import "./style.css";
 
@@ -20,7 +21,10 @@ const UserRide = () => {
             <div>
                 <h3>List of Rides</h3>
                 <div>
-                    
+                    <UserRideCard />
+                </div>
+                <div>
+
                 </div>
             </div>
 

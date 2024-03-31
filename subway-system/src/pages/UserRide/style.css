@@ -2,3 +2,13 @@
     height: 30px;
     margin-bottom: 20px;
 }
+
+.ride-card {
+    width: fit-content;
+    padding: 50px;
+    
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
