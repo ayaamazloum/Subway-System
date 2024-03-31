@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 
 import UserStation from "./pages/UserStation/index.jsx";
 import UserRide from "./pages/UserRide/index.jsx";
+import UserProfile from "./pages/UserProfile/index.jsx";
 
 import { Route, Routes } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/rides" element={<Rides />} />
         <Route path="/userstation" element={<UserStation />} />
         <Route path="/userride" element={<UserRide />} />
+        <Route path="/userprofile" element={<UserProfile />} />
       </Routes>
       
       {BranchRoutes.includes(location.pathname) && (
