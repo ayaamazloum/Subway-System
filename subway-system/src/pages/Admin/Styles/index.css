@@ -121,3 +121,114 @@ a {
   width: 600px !important;
   height: 300px !important;
 }
+
+.content .title button {
+  background-color: var(--green-color);
+  color: var(--white-color);
+  font-size: 18px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-top: -12px;
+}
+.content .title button:hover {
+  cursor: pointer;
+}
+.managers-page {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+@media (max-width: 767px) {
+  .managers-page {
+    grid-template-columns: minmax(200px, 1fr);
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 10px;
+  }
+}
+.managers-page .manager {
+  overflow: hidden;
+}
+.managers-page .manager .actions button {
+  width: 85px;
+  font-size: 15px;
+  padding: 2px 10px;
+  border-radius: 5px;
+  color: var(--white-color);
+  border: none;
+  background-color: var(--green-color);
+}
+.managers-page .manager .actions svg {
+  width: 15px;
+  height: 15px;
+  transition: color 0.2s ease-in;
+}
+.managers-page .manager .actions .edit:hover {
+  cursor: pointer;
+  color: var(--blue-color);
+}
+.managers-page .manager .actions .delete:hover {
+  cursor: pointer;
+  color: var(--red-color);
+}
+.managers-page .manager .info {
+  font-size: 13px;
+  margin-bottom: 10px;
+  padding: 20px;
+  gap: 5px;
+}
+.managers-page .manager .info p {
+  color: var(--gray-color);
+}
+
+.coinrequests-page {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+@media (max-width: 767px) {
+  .coinrequests-page {
+    grid-template-columns: minmax(200px, 1fr);
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 10px;
+  }
+}
+.coinrequests-page .coinrequest {
+  overflow: hidden;
+}
+.coinrequests-page .coinrequest .actions button {
+  width: 85px;
+  font-size: 15px;
+  padding: 2px 10px;
+  border-radius: 5px;
+  color: var(--white-color);
+  border: none;
+  background-color: var(--green-color);
+}
+.coinrequests-page .coinrequest .actions svg {
+  width: 15px;
+  height: 15px;
+  transition: color 0.2s ease-in;
+}
+.coinrequests-page .coinrequest .actions .edit:hover {
+  cursor: pointer;
+  color: var(--blue-color);
+}
+.coinrequests-page .coinrequest .actions .delete:hover {
+  cursor: pointer;
+  color: var(--red-color);
+}
+.coinrequests-page .coinrequest .info {
+  font-size: 13px;
+  margin-bottom: 10px;
+  padding: 20px;
+  gap: 5px;
+}
+.coinrequests-page .coinrequest .info .amount svg {
+  color: var(--green-color);
+}
+.coinrequests-page .coinrequest .info .status button {
+  padding: 3px 20px;
+  border-radius: 5px;
+  background-color: var(--orange-color);
+  color: var(--white-color);
+  font-size: 14px;
+}

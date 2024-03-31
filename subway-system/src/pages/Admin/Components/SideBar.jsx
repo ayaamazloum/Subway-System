@@ -38,7 +38,7 @@ const SideBar = () => {
             className="d-flex align-center fs-18 c-black rad-6 p-10"
           >
             <FontAwesomeIcon icon={faUsers} />
-            <span className="hide-mobile">Branches</span>
+            <span className="hide-mobile">Managers</span>
           </a>
         </li>
         <li>
