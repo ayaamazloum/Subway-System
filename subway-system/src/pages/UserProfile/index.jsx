@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
+import RideCardReview from "./components/RideCardReview";
 
 const UserProfile = () => {
 
@@ -16,7 +17,18 @@ const UserProfile = () => {
                 <div className="button-div">
                     <button>Send</button>
                 </div>
-                
+            </div>
+            <div className="button-div padding">
+                <button>Request Coins</button>
+            </div>
+            <div>
+                <h3 className="padding">Rides History</h3>
+                <div className="flex gap space-between padding">
+                    <RideCardReview />
+                    <RideCardReview />
+                    <RideCardReview />
+                    <RideCardReview />
+                </div>
             </div>
         </div>
     )
