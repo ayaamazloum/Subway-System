@@ -11,8 +11,8 @@ class BranchStationController extends Controller
 {
     public function index()
     {
-        $user_id = auth()->id();
-        $branch = Branch::where('user_id', $user_id)->first();
+        // $user_id = auth()->id();
+        $branch = Branch::where('user_id', 3)->first();
         $branch_id = $branch->id;
         $branch = Branch::with('station')->find($branch_id);
         $station = $branch->station;
