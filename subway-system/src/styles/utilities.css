@@ -7,10 +7,10 @@
   border: 0;
 }
 
-.app {
-  font-family: "Lexend", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 
 .page {
@@ -62,6 +62,12 @@
   height: 50%;
 }
 
+.lexend-text {
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -92,4 +98,32 @@
 
 .semi-rounded {
   border-radius: 5px;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.gap-20 {
+  gap: 10px;
+}
+
+.gap-40 {
+  gap: 40px;
+}
+
+.gap-50 {
+  gap: 50px;
+}
+
+.gap-70 {
+  gap: 70px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
+button {
+  cursor: pointer;
 }

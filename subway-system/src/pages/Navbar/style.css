@@ -1,0 +1,39 @@
+.navbar {
+  height: 80px;
+  padding: 0 40px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.nav-logo {
+  width: 200px;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.logout-btn {
+  padding: 10px 20px;
+  border: 1px solid #35b368;
+}
+
+@media (max-width: 900px) {
+  .nav-logo {
+    width: 120px;
+  }
+  .nav-links {
+    display: none;
+  }
+  .collapsed-navlinks {
+    display: flex;
+    flex-direction: column !important;
+    position: absolute;
+    right: 0;
+    top: 100px;
+    width: 100%;
+    background-color: #fff;
+    gap: 30px;
+  }
+}

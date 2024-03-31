@@ -18,6 +18,7 @@ import { useLocation } from "react-router-dom";
 import SideBar from "./pages/Branch/Components/SideBar.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Stations from "./pages/Branch/Components/Stations.jsx";
+import BranchAuthentication from "./pages/Authentication/BranchAuthentication.jsx";
 
 const App = () => {
   const location = useLocation();
@@ -28,7 +29,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app">
+    <div className="app lexend-text">
       {UserRoutes.includes(location.pathname) && (
           <div className="app">
             <Routes>
@@ -40,6 +41,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Authentication />}></Route>
+        <Route path="/branchAuth" element={<BranchAuthentication />}></Route>
         <Route path="/stations" element={<Stations />} />
         <Route path="/rides" element={<Rides />} />
         <Route path="/userstation" element={<UserStation />} />
