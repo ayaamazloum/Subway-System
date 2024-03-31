@@ -4,7 +4,7 @@ import "./styles/colors.css";
 import Authentication from "./pages/Authentication";
 import Main from "./pages/Branch/index.jsx";
 import Rides from "./pages/Branch/Components/Rides.jsx";
-import NavBar from "./pages/Navbar/index.jsx";
+import NavBar from "./components/Navbar/index.jsx";
 import BranchRoutes from "./core/routes/BranchRoutes.jsx";
 import AdminRoutes from "./core/routes/AdminRoutes.jsx";
 import UserRoutes from "./core/routes/UserRoutes.jsx";

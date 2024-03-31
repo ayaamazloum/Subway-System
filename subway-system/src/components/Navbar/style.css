@@ -19,6 +19,12 @@
   border: 1px solid #35b368;
 }
 
+.logout-btn:hover {
+  background-color: #35b368;
+  color: #fff;
+  transition: color 0.2s linear, background-color 0.2s linear;
+}
+
 @media (max-width: 900px) {
   .nav-logo {
     width: 120px;
