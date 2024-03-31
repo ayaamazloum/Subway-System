@@ -17,8 +17,9 @@ const Station = () => {
       <div className="info between-flex">
         <div>
           <ul className=" ul-list m-0  list-none">
-            <li className="mt-25 d-flex align-center done">open hours</li>
-            <li className="mt-25 d-flex pb-10 align-center done">open hours</li>
+            <li className="mt-25 d-flex align-center done">
+              open hours - open hours
+            </li>
           </ul>
         </div>
         <div className="location">
