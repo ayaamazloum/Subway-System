@@ -18,13 +18,19 @@ const UserRide = () => {
                     <h1>Beirut</h1>
                 </div>
             </div>
-            <div>
-                <h3>List of Rides</h3>
-                <div>
+            <div className="padding">
+                <h3 className="padding-bottom">List of Rides</h3>
+                <div className="flex space-between padding">
+                    <UserRideCard />
+                    <UserRideCard />
+                    <UserRideCard />
                     <UserRideCard />
                 </div>
-                <div>
-
+                <div className="flex space-between padding">
+                    <UserRideCard />
+                    <UserRideCard />
+                    <UserRideCard />
+                    <UserRideCard />
                 </div>
             </div>
 
