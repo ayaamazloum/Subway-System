@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Branch\BranchMessageController;
 use App\Http\Controllers\Branch\BranchReviewController;
+use App\Http\Controllers\Branch\BranchStationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,5 @@ Route::delete('messages/{id}', [BranchMessageController::class, 'destroy']);
 Route::get('reviews', [BranchReviewController::class, 'index']);
 Route::post('reviews', [BranchReviewController::class, 'index']);
 Route::delete('reviews/{id}', [BranchReviewController::class, 'index']);
+Route::get('stations', [BranchStationController::class, 'index']);
+Route::put('stations/{id}', [BranchStationController::class, 'update']);
