@@ -37,6 +37,12 @@
 
 .hero-btn {
   padding: 10px 30px;
+  transition: color 0.2s linear, background-color 0.2s linear;
+}
+
+.hero-btn:hover {
+  color: #35b368;
+  background-color: #fff;
 }
 
 .section {
@@ -62,4 +68,38 @@
 
 .number-item > p {
   padding-left: 7px;
+}
+
+.download-section {
+  margin: 70px 10%;
+  padding: 5%;
+  position: relative;
+}
+
+.download-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80%;
+}
+
+.large-text {
+  font-size: 40px;
+  max-width: 60%;
+  text-align: center;
+  z-index: 1;
+}
+
+.download-btn {
+  padding: 15px 30px;
+  z-index: 1;
+}
+
+.download-btn:hover {
+  transform: scale(104%);
+  transition: transform 0.15s ease;
+}
+
+.download-icon {
+  width: 20px;
 }
