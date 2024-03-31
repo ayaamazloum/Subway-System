@@ -23,7 +23,7 @@ class BranchMessageController extends Controller
         $data = request()->validate([
             'sender_id' => 'required',
             'receiver_id' => 'required',
-            'content' => 'required',
+            'content' => 'required|string|max:300',
         ]);
         Message::create($data);
         return response()->json(['status' => 'success', 'messsage' => "Message Sent Successfully"], 200);

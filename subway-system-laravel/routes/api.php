@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Branch\BranchMessageController;
+use App\Http\Controllers\Branch\BranchReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('messages', [BranchMessageController::class, 'index']);
 Route::post('messages', [BranchMessageController::class, 'store']);
 Route::delete('messages/{id}', [BranchMessageController::class, 'destroy']);
+Route::get('reviews', [BranchReviewController::class, 'index']);
+Route::post('reviews', [BranchReviewController::class, 'index']);
+Route::delete('reviews/{id}', [BranchReviewController::class, 'index']);
