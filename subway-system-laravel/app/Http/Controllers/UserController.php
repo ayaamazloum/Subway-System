@@ -42,7 +42,14 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $token = JWTAuth::fromUser(Auth::user());
 
-            return response()->json(['token' => compact('token')], 200);
+            $role_id = User::where('email', $request->email)->first()->role_id;
+            $role_id === 1 
+            ? $redirect =  '/admin/overview'
+            : ($role_id === 2
+                ? $redirect =  '/admin/branches'
+                : $redirect =  '/');
+                
+            return response()->json(['token' => compact('token'), 'redirect'=>$redirect], 200);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
