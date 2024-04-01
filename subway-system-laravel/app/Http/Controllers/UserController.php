@@ -12,9 +12,9 @@ class UserController extends Controller
 {
     public function register(Request $request)
     {
-        $existing_email = User::where('email', $request->email)->get()[0];
+        $existing_email = User::where('email', $request->email)->first();
 
-        if($existing_email->exists())
+        if($existing_email)
             return response()->json(['error' => 'Email already exists'], 422);
 
         $passenger_role = Role::where('name', 'Passenger')->get()[0];
