@@ -26,7 +26,7 @@ class UserController extends Controller
         }
 
         $user = User::create([
-            'name' => $request->name,
+            'name' => $request->first_name.' '.$request->last_name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role_id' => $passenger_role->id
