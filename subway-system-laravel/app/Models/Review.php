@@ -8,8 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
-    public function passenger()
-    {
-        return $this->belongsTo(Passenger::class);
-    }
 }
