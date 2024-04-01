@@ -57,6 +57,14 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+    public function passenger()
+    {
+        return $this->belongsTo(Passenger::class);
+    }
 
     protected $fillable = ['name', 'email', 'password', 'role_id'];
 
@@ -77,10 +85,5 @@ class User extends Authenticatable implements JWTSubject
     public function role()
     {
         return $this->belongsTo(Role::class);
-    }
-
-    public function passenger()
-    {
-        return $this->hasMany(Passenger::class);
     }
 }

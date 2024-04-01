@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBranchController;
+use App\Mail\InvitationEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/email', [AdminBranchController::class, 'index']);
