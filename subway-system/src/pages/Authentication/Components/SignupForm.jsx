@@ -2,11 +2,14 @@ import { sendRequest } from '../../../core/tools/remote/request';
 import { requestMehods } from "../../../core/enums/requestMethods";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const SignupForm = () => {
   const [credentials, setCredentials] = useState({ first_name: "", last_name: "", email: "", password: "" });
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [longitude, setlongitude] = useState();
+  const [latitude, setlatitude] = useState();
+  //const navigate = useNavigate();
 
   const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
@@ -19,13 +22,23 @@ const SignupForm = () => {
     if (error !== "")
       return;
 
-    const res = await sendRequest(requestMehods.POST, "/register", {...credentials});
-    
-    if (res.data.status === "success") {
-      //localStorage.setItem("token", res.data.token);
-      //notification
-      navigate("/auth");
+    try {
+      const res = await sendRequest(requestMehods.POST, "/register", {
+        'name': credentials.first_name + " " + credentials.last_name,
+        'email': credentials.email,
+        'password': credentials.password,
+        'longitude': longitude,
+        'latitude': latitude
+      });
+    } catch (error) {
+      setError(error.response.data.errors.email);
     }
+    
+    // if (res.data.status === "success") {
+    //   //localStorage.setItem("token", res.data.token);
+    //   //notification
+    //   navigate("/auth");
+    // }
   }
 
   useEffect(() => {
@@ -38,6 +51,22 @@ const SignupForm = () => {
       setError("");
     }
   }, [credentials]);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setlongitude(position.coords.longitude);
+        setlatitude(position.coords.latitude);
+      }, (error) => {
+        console.error('Error getting location:', error);
+      });
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      //error message
+      return;
+    }
+    setError('');
+  }, []);
 
   return (
       <>
@@ -54,11 +83,11 @@ const SignupForm = () => {
           <input className='input lexend-text semi-rounded sm-text' type="password" placeholder='Password' 
           onChange={(e) => { setCredentials({ ...credentials, password: e.target.value }); }} />
         
-          {error !="" && <p className='red-text xsm-text'>{error}</p>}
+          {error != "" && <p className='red-text xsm-text'>{error}</p>}
         </div>
         <button onClick={signup} className='submit-btn sm-text bold primary-bg white-text semi-rounded'>Sign up</button>
     </>
   )
 }
 
-export default SignupForm
+export default SignupForm;
