@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
-use App\Rules\UniqueEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
@@ -38,8 +40,16 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $token = Auth::user()->createToken('MyApp')->accessToken;
-            return response()->json(['token' => $token]);
+            $token = JWTAuth::fromUser(Auth::user());
+
+            $role_id = User::where('email', $request->email)->first()->role_id;
+            $role_id === 1 
+            ? $redirect =  '/admin/overview'
+            : ($role_id === 2
+                ? $redirect =  '/admin/branches'
+                : $redirect =  '/');
+                
+            return response()->json(['token' => compact('token'), 'redirect'=>$redirect], 200);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
