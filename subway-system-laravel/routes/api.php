@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCoinRequestController;
 use App\Http\Controllers\Branch\BranchMessageController;
 use App\Http\Controllers\Branch\BranchReviewController;
 use App\Http\Controllers\Branch\BranchRideController;
@@ -31,3 +32,4 @@ Route::get('stations', [BranchStationController::class, 'index']);
 Route::put('stations/{id}', [BranchStationController::class, 'update']);
 Route::get('rides', [BranchRideController::class, 'index']);
 Route::put('rides/{id}', [BranchRideController::class, 'index']);
+Route::get('coinrequests', [AdminCoinRequestController::class, 'index']);

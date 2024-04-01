@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CoinRequest extends Model
 {
     use HasFactory;
+    public function passenger(){
+        return $this->belongsTo(Passenger::class);
+    }
 }
