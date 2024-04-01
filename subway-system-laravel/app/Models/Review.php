@@ -12,4 +12,8 @@ class Review extends Model
     {
         return $this->belongsTo(Passenger::class);
     }
+    public function ride()
+    {
+        return $this->belongsTo(Ride::class);
+    }
 }
