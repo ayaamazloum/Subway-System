@@ -21,19 +21,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('messages', [BranchMessageController::class, 'index']);
-Route::post('messages', [BranchMessageController::class, 'store']);
-Route::delete('messages/{id}', [BranchMessageController::class, 'destroy']);
-Route::get('reviews', [BranchReviewController::class, 'index']);
-Route::post('reviews', [BranchReviewController::class, 'index']);
-Route::delete('reviews/{id}', [BranchReviewController::class, 'index']);
-Route::get('stations', [BranchStationController::class, 'index']);
-Route::put('stations/{id}', [BranchStationController::class, 'update']);
-Route::get('rides', [BranchRideController::class, 'index']);
-Route::put('rides/{id}', [BranchRideController::class, 'index']);
-Route::get('coinrequests', [AdminCoinRequestController::class, 'index']);
-Route::post('email', [AdminBranchController::class, 'store']);
-Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
+Route::middleware('jwt.auth')->group(function () {
+    Route::middleware('role:Branch')->group(function () {
+        Route::get('messages', [BranchMessageController::class, 'index']);
+        Route::post('messages', [BranchMessageController::class, 'store']);
+        Route::delete('messages/{id}', [BranchMessageController::class, 'destroy']);
+        Route::get('reviews', [BranchReviewController::class, 'index']);
+        Route::post('reviews', [BranchReviewController::class, 'store']);
+        Route::delete('reviews/{id}', [BranchReviewController::class, 'index']);
+        Route::get('stations', [BranchStationController::class, 'index']);
+        Route::put('stations/{id}', [BranchStationController::class, 'update']);
+        Route::get('rides', [BranchRideController::class, 'index']);
+        Route::put('rides/{id}', [BranchRideController::class, 'index']);
+    });
+});
+Route::middleware('jwt.auth')->group(function () {
+    Route::middleware('role:Passenger')->group(function () {
+        Route::post('reviews', [BranchReviewController::class, 'store']);
+    });
+});
+Route::middleware('jwt.auth')->group(function () {
+    Route::middleware('role:Admin')->group(function () {
+        Route::get('coinrequests', [AdminCoinRequestController::class, 'index']);
+        Route::post('email', [AdminBranchController::class, 'store']);
+        Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
+    });
+});
+
+
+
 Route::middleware('guest')->group(function () {
     Route::post('login', [UserController::class, "login"])->name('login');
     Route::post('register', [UserController::class, "register"])->name('register');

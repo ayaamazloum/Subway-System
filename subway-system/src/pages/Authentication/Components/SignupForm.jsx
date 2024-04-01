@@ -1,4 +1,4 @@
-import { sendRequest } from '../../../core/tools/remote/request';
+import  sendRequest  from '../../../core/tools/remote/request';
 import { requestMehods } from "../../../core/enums/requestMethods";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,12 +1,10 @@
 import axios from "axios";
 //import { useNavigate } from "react-router-dom";
-
-
-export const sendRequest = async (method, route, body) => {
+const sendRequest = async (method, route, body) => {
   try {
-    axios.defaults.baseURL = "http://localhost:8000/api";
+    axios.defaults.baseURL = "http://127.0.0.1:8000/api/";
     //const navigate = useNavigate();
-    
+
     const response = await axios.request({
       method: method,
       url: route,
@@ -26,3 +24,5 @@ export const sendRequest = async (method, route, body) => {
     return response;
   } catch (error) { throw error; }
 };
+
+export default sendRequest;
