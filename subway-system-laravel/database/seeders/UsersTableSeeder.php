@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
             "email"=>'hanady@gmail.com',
             "name"=>'hanady',
             "password"=>'password123',
+            "role_id"=>'2'
         ]);
     }
 }
