@@ -17,11 +17,6 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,8 +37,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $fillable = ['name', 'email', 'password', 'role_id'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            $user->passenger()->create([
+                'user_id' => $user->id,
+                'latitude' => request()->input('latitude'),
+                'longitude' => request()->input('longitude'),
+                'wallet_balance' => request()->input('wallet_balance'),
+            ]);
+        });
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function passenger()
+    {
+        return $this->hasMany(Passenger::class);
     }
 }
