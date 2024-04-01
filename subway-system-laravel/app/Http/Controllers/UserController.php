@@ -53,20 +53,22 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $token = JWTAuth::fromUser(Auth::user());
-
-            $role_id = User::where('email', $request->email)->first()->role_id;
-            $role_id === 1 
-            ? $redirect =  '/admin/overview'
-            : ($role_id === 2
-                ? $redirect =  '/admin/branches'
-                : $redirect =  '/');
-                
-            return response()->json(['token' => compact('token'), 'redirect'=>$redirect], 200);
-        } else {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (!Auth::attempt($credentials)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Unauthorized',
+            ], 401);
         }
+
+        $user = Auth::user();
+        $token = Auth::login($user);
+        return response()->json([
+            'status' => 'success',
+            'user' => $user,
+            'authorization' => [
+                'token' => $token,
+                'type' => 'bearer',
+            ]
+        ]);
     }
 }

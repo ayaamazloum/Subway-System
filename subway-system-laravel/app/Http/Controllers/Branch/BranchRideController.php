@@ -13,7 +13,7 @@ class BranchRideController extends Controller
     public function index()
     {
         $user_id = auth()->id();
-        $branch = Branch::where('user_id', 3)->first();
+        $branch = Branch::where('user_id', $user_id)->first();
         $branch_id = $branch->id;
         $branch = Branch::with('station')->find($branch_id);
         $station = $branch->station;

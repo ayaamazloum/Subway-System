@@ -21,10 +21,10 @@ class BranchMessageController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'sender_id' => 'required',
             'receiver_id' => 'required',
             'content' => 'required|string|max:300',
         ]);
+        $data['sender_id'] = auth()->id();
         Message::create($data);
         return response()->json(['status' => 'success', 'messsage' => "Message Sent Successfully"], 200);
     }
