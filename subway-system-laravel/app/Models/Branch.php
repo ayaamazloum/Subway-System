@@ -10,6 +10,6 @@ class Branch extends Model
     use HasFactory;
     public function station()
     {
-        return $this->hasOne(Station::class);
+        return $this->hasMany(Station::class);
     }
 }
