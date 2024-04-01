@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->double('latitude', 10, 6);
-            $table->double('longitude', 10, 6);
+            $table->double('latitude');
+            $table->double('longitude');
             $table->float('wallet_balance')->default(0);
+            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }
