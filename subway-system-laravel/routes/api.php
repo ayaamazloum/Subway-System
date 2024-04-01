@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBranchController;
 use App\Http\Controllers\Admin\AdminCoinRequestController;
 use App\Http\Controllers\Branch\BranchMessageController;
 use App\Http\Controllers\Branch\BranchReviewController;
 use App\Http\Controllers\Branch\BranchRideController;
 use App\Http\Controllers\Branch\BranchStationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +35,7 @@ Route::put('stations/{id}', [BranchStationController::class, 'update']);
 Route::get('rides', [BranchRideController::class, 'index']);
 Route::put('rides/{id}', [BranchRideController::class, 'index']);
 Route::get('coinrequests', [AdminCoinRequestController::class, 'index']);
+Route::get('/email', [AdminBranchController::class, 'index']);
+
+Route::post('login', [UserController::class, "login"]);
+Route::post('register', [UserController::class, "register"]);
