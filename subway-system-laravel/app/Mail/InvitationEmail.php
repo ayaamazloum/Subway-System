@@ -9,16 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class InvitationEmail extends Mailable
+class InvitationEmail extends Mailable 
 {
     use Queueable, SerializesModels;
-    public $message;
+    public $mail_message;
     /**
      * Create a new message instance.
      */
     public function __construct($message)
     {
-        $this->message = $message;
+        $this->mail_message = $message;
     }
 
     /**

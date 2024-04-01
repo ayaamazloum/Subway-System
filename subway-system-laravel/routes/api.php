@@ -22,9 +22,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 Route::get('messages', [BranchMessageController::class, 'index']);
 Route::post('messages', [BranchMessageController::class, 'store']);
 Route::delete('messages/{id}', [BranchMessageController::class, 'destroy']);
@@ -41,3 +38,9 @@ Route::get('/email', [AdminBranchController::class, 'index']);
 Route::post('login', [UserController::class, "login"]);
 Route::post('register', [UserController::class, "register"]);
 Route::get('view_stations', [UserStationController::class, "view_stations"]);
+Route::post('email', [AdminBranchController::class, 'store']);
+Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
+Route::middleware('guest')->group(function () {
+    Route::post('login', [UserController::class, "login"])->name('login');
+    Route::post('register', [UserController::class, "register"])->name('register');
+});
