@@ -12,4 +12,9 @@ class Ride extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function station()
+    {
+        return $this->belongsTo(Station::class, 'start_station_id') ;
+    }
 }

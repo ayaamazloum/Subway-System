@@ -12,4 +12,9 @@ class Station extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+
+    public function rides()
+    {
+        return $this->hasMany(Ride::class);
+    }
 }

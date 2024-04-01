@@ -4,18 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Models\Passenger;
 use App\Models\Station;
+use App\Models\Ride;
 use Illuminate\Http\Request;
 
 class UserStationController extends Controller
 {
     public function view_stations()
-    {
-        $stations = Station::all();
+    {  
+        $ridesWithReviews = Ride::with('reviews')->get();
+        $averageRatings = [];
+        foreach ($ridesWithReviews as $ride) {
+            $totalRating = 0;
+            $reviewCount = $ride->reviews->count();
+            foreach ($ride->reviews as $review) {
+                $totalRating += $review->rating;
+            }
+            $averageRating = $reviewCount > 0 ? $totalRating / $reviewCount : 0;
+            $averageRatings[$ride->id] = $averageRating;
 
-        return response()->json([
-            "message" => "found successfully",
-            "stations" => $stations
-        ], 200);
+        }
+        foreach ($averageRatings as $rideId => $averageRating) {
+            $ride = Ride::find($rideId);
+            if ($ride) {
+                $station = $ride->station;
+                if ($station) {
+                    // Update the station's average rating
+                    $station->average_rating = $averageRating;
+                    $station->save();
+                }
+            }
+        }
+
+        $stations = Station::all();
+        return response()->json( [
+            "message" => 'success',
+            "data" => $stations
+        ]);
+
     }
 
     public function vew_recommended_stations(Request $request)

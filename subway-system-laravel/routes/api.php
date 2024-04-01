@@ -54,4 +54,5 @@ Route::middleware('jwt.auth')->group(function () {
 Route::middleware('guest')->group(function () {
     Route::post('login', [UserController::class, "login"])->name('login');
     Route::post('register', [UserController::class, "register"])->name('register');
+    Route::get('view_stations', [UserStationController::class, "view_stations"]);
 });
