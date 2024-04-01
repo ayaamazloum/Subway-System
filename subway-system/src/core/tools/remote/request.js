@@ -19,10 +19,10 @@ const sendRequest = async (method, route, body) => {
     //     navigate("/auth");
     // }
 
+    console.log(response);
+
     return response;
-  } catch (error) {
-    console.error(error);
-  }
+  } catch (error) { throw error; }
 };
 
 export default sendRequest;

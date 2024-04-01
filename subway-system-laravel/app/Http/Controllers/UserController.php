@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Passenger;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Role;
 use App\Models\User;
