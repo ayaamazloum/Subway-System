@@ -13,10 +13,14 @@ class BranchStationController extends Controller
     {
         $user_id = auth()->id();
         $branch = Branch::where('user_id', $user_id)->first();
+        if (!$branch) {
+            return response()->json(['status' => 'error', 'message' => 'Branch not found'], 404);
+        }
+
         $branch_id = $branch->id;
-        $branch = Branch::with('station')->find($branch_id);
-        $station = $branch->station;
-        return response()->json(['status' => 'success', 'data' => $station]);
+        $branchWithStations = Branch::with('station')->find($branch_id); // Use with() to eager load the stations
+        $stations = $branchWithStations->station; // Retrieve stations from the loaded relationship
+        return response()->json(['status' => 'success', 'data' => $stations]);
     }
     public function update($id, Request $request)
     {
