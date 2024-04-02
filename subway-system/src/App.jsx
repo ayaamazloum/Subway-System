@@ -24,19 +24,19 @@ import Reviews from "./pages/Branch/Components/Reviews.jsx";
 import Messages from "./pages/Branch/Components/Messages.jsx";
 import Stations from "./pages/Branch/Components/Stations.jsx";
 import BranchAuthentication from "./pages/Authentication/BranchAuthentication.jsx";
-import { useNavigate } from 'react-router';
 import Cookies from "universal-cookie";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const cookie = new Cookies();
-
-  const navigate = useNavigate();
 
   const [userType, setUserType] = useState(cookie.get('user_type'));
   const location = useLocation();
 
   return (
     <div className="app lexend-text">
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Authentication />}></Route>

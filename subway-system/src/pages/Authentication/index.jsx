@@ -10,7 +10,7 @@ import SignupForm from './Components/SignupForm';
 import Cookies from "universal-cookie";
 import { useNavigate } from 'react-router-dom';
 
-const Authentication = ({route, logout}) => {
+const Authentication = ({logout}) => {
     const [isSignin, setIsSignin] = useState(true);
     const navigate = useNavigate();
     
@@ -28,6 +28,10 @@ const Authentication = ({route, logout}) => {
         }
     }
 
+    const handleSetSignIn = () => {
+        setIsSignin(true);
+    }
+
     useEffect(() => {
         if (logout) { handleLogout(); }
     }, []);
@@ -41,7 +45,7 @@ const Authentication = ({route, logout}) => {
                 <button className={`auth-tab lexend-text sm-text white-text secondary-bg  ${!isSignin && 'active-tab'}`}
                     onClick={() => setIsSignin(false)}>SIGN UP</button>
             </div>
-            {isSignin ? <SigninForm/> : <SignupForm/>}
+            {isSignin ? <SigninForm/> : <SignupForm handleSetSignIn={handleSetSignIn} />}
         </div>
         <img className='auth-img half-width' src={authimg}/>
     </div>
