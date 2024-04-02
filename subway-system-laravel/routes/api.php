@@ -43,8 +43,8 @@ Route::middleware('jwt.auth')->group(function () {
 Route::middleware('jwt.auth')->group(function () {
     Route::middleware('role:Admin')->group(function () {
         Route::get('coinrequests', [AdminCoinRequestController::class, 'index']);
-        Route::post('email', [AdminBranchController::class, 'store']);
         Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
+        Route::post('email', [AdminBranchController::class, 'store']);
     });
 });
 
