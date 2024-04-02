@@ -1,13 +1,36 @@
 import './style.css';
 import authimg from '../../assets/images/auth.jpg';
-import logo from '../../assets/images/logo.svg'
+import logo from '../../assets/images/logo.svg';
 
-import { useState } from 'react';
+import sendRequest from '../../core/tools/remote/request';
+import { requestMehods } from "../../core/enums/requestMethods";
+import { useEffect, useState } from 'react';
 import SigninForm from './Components/SigninForm';
 import SignupForm from './Components/SignupForm';
+import Cookies from "universal-cookie";
+import { useNavigate } from 'react-router-dom';
 
-const Authentication = () => {
-    const [ isSignin, setIsSignin ] = useState(true);
+const Authentication = ({route, logout}) => {
+    const [isSignin, setIsSignin] = useState(true);
+    const navigate = useNavigate();
+    
+    const handleLogout = async () => {
+        try {
+            navigate('/auth');
+            const response = await sendRequest(requestMehods.POST, "/logout");
+            if (response.data.status === 'success') {
+                const cookie = new Cookies();
+                cookie.remove('token');
+                cookie.remove('user_type');
+            }
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+    }
+
+    useEffect(() => {
+        if (logout) { handleLogout(); }
+    }, []);
         
     return <div className='auth-page flex full-width full-height'>
         <div className='auth-container flex column center gap-50 half-width secondary-bg'>

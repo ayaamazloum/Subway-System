@@ -2,7 +2,6 @@ import  sendRequest  from '../../../core/tools/remote/request';
 import { requestMehods } from "../../../core/enums/requestMethods";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
 
 const SignupForm = () => {
   const [credentials, setCredentials] = useState({ first_name: "", last_name: "", email: "", password: "" });
@@ -35,7 +34,6 @@ const SignupForm = () => {
     }
     
     // if (res.data.status === "success") {
-    //   //localStorage.setItem("token", res.data.token);
     //   //notification
     //   navigate("/auth");
     // }
