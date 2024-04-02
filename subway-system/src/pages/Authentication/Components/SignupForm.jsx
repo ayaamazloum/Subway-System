@@ -1,15 +1,13 @@
 import  sendRequest  from '../../../core/tools/remote/request';
 import { requestMehods } from "../../../core/enums/requestMethods";
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import { toast } from 'react-toastify';
 
-const SignupForm = () => {
+const SignupForm = ({handleSetSignIn}) => {
   const [credentials, setCredentials] = useState({ first_name: "", last_name: "", email: "", password: "" });
   const [error, setError] = useState("");
   const [longitude, setlongitude] = useState();
   const [latitude, setlatitude] = useState();
-  //const navigate = useNavigate();
 
   const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
@@ -30,15 +28,11 @@ const SignupForm = () => {
         'longitude': longitude,
         'latitude': latitude
       });
+      handleSetSignIn();
+      toast.success('Signed up successfully. Now you can sign in into your account.');
     } catch (error) {
-      setError(error.response.data.errors.email);
+      setError(error.response.data.errors.email?error.response.data.errors.email:error.response.data.errors);
     }
-    
-    // if (res.data.status === "success") {
-    //   //localStorage.setItem("token", res.data.token);
-    //   //notification
-    //   navigate("/auth");
-    // }
   }
 
   useEffect(() => {
