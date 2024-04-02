@@ -54,6 +54,7 @@ body {
 .popup-inner button[type="submit"] {
   background-color: #35b368;
   color: #fff;
+  text-transform: capitalize;
   border-radius: 5px;
   margin-top: 10px;
   padding: 5px 10px;

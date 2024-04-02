@@ -2,16 +2,45 @@ import React, { useEffect, useState } from "react";
 import Station from "./Station";
 import sendRequest from "../../../core/tools/remote/request.js";
 import PopUp from "../../../components/PopUp";
+import { requestMehods } from "../../../core/enums/requestMethods.js";
+
 const Stations = () => {
   const [stations, setStations] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
+  const [selectedStation, setSelectedStation] = useState(null);
+  const [updateStation, setUpdateStation] = useState({
+    facilities: "",
+    service_status: "",
+    operating_hours: "",
+  });
 
-  const openPopup = () => {
+  const openPopup = (station) => {
     setShowPopup(true);
+    setSelectedStation(station);
+    setUpdateStation({
+      id: station.id,
+      facilities: station.facilities,
+      service_status: station.service_status,
+      operating_hours: station.operating_hours,
+    });
   };
 
   const closePopup = () => {
     setShowPopup(false);
+  };
+
+  const handleSubmit = async () => {
+    const response = await sendRequest(
+      requestMehods.PUT,
+      `stations/${selectedStation.id}`,
+      updateStation
+    );
+    if (response.data.status === "success") {
+      closePopup();
+      sendRequest("GET", "stations").then((response) => {
+        setStations(response.data.data);
+      });
+    }
   };
 
   useEffect(() => {
@@ -24,11 +53,9 @@ const Stations = () => {
     <>
       <h1 className="p-relative fs-30">Stations</h1>
       <div className="stations-page p-relative d-grid gap-20 m-20">
-        {stations?.map((station) => {
-          return (
-            <Station key={station.id} station={station} openPopup={openPopup} />
-          );
-        })}
+        {stations?.map((station) => (
+          <Station key={station.id} station={station} openPopup={openPopup} />
+        ))}
       </div>
       {showPopup && (
         <PopUp
@@ -36,23 +63,59 @@ const Stations = () => {
           buttenText="Update"
           formTitle="Update Station"
           isOpen={showPopup}
+          handleSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
           closePopUp={closePopup}
         >
           <div>
             <label htmlFor="facilities">Facilities</label>
             <input
               type="text"
+              value={updateStation.facilities}
               name="facilities"
+              onChange={(e) => {
+                setUpdateStation({
+                  ...updateStation,
+                  facilities: e.target.value,
+                });
+              }}
+              placeholder="enter the available facilities"
+            />
+          </div>
+          <div>
+            <label htmlFor="operatingHours">Operation Hours</label>
+            <input
+              type="text"
+              value={updateStation.operating_hours}
+              name="operatingHours"
+              onChange={(e) => {
+                setUpdateStation({
+                  ...updateStation,
+                  operating_hours: e.target.value,
+                });
+              }}
               placeholder="enter the available facilities"
             />
           </div>
           <div>
             <label htmlFor="status">Status</label>
-            <input
-              type="text"
+            <select
               name="status"
-              placeholder="enter the station status"
-            />
+              value={updateStation.service_status}
+              onChange={(e) => {
+                setUpdateStation({
+                  ...updateStation,
+                  service_status: e.target.value,
+                });
+              }}
+              id="status"
+            >
+              <option value="">Select the status</option>
+              <option value="active">Active</option>
+              <option value="closed">Closed</option>
+            </select>
           </div>
         </PopUp>
       )}

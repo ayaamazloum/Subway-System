@@ -146,6 +146,7 @@ a {
   width: 85px;
   font-size: 15px;
   padding: 2px 10px;
+  text-transform: capitalize;
   border-radius: 5px;
   color: var(--white-color);
   border: none;
@@ -278,4 +279,13 @@ a {
 .messages-page .message .reply svg:hover {
   cursor: pointer;
   color: var(--green-color);
+}
+.active {
+  background-color: var(--green-color) !important;
+}
+.closed {
+  background-color: var(--red-color) !important;
+}
+.delayed {
+  background-color: var(--orange-color) !important;
 }

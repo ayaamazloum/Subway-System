@@ -12,7 +12,13 @@ const Station = ({ station, openPopup }) => {
         <div className="p-20 between-flex">
           <h4 className="m-0 fs-18">{station.name}</h4>
           <div className="center-flex gap-5 actions">
-            <button>{station.service_status}</button>
+            <button
+              className={
+                station.service_status === "active" ? "active" : "closed"
+              }
+            >
+              {station.service_status}
+            </button>
             <FontAwesomeIcon
               icon={faPenToSquare}
               onClick={() => openPopup(station)}

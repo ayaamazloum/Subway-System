@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\InvitationEmail;
 use App\Models\Branch;
 use App\Models\Invitation;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
@@ -32,6 +33,10 @@ class AdminBranchController extends Controller
     }
     public function create_branch(Request $request)
     {
+        $branch_role = Role::where('name', 'Branch')->first();
+        if (!$branch_role) {
+            return response()->json(['error' => 'Role not found'], 404);
+        }
         try {
             $data = $request->validate([
                 "email" => ["required", "email", Rule::exists('invitations', 'email')],
@@ -43,7 +48,7 @@ class AdminBranchController extends Controller
             $user->name = $data['name'];
             $user->email = $data['email'];
             $user->password = bcrypt($data['password']);
-            $user->role_id = 1;
+            $user->role_id = $branch_role->id;
             $user->save();
             $branch = new Branch();
             $branch->user_id = $user->id;
