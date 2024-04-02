@@ -64,4 +64,14 @@ class UserStationController extends Controller
             "data" => $stations
         ], 200);
     }
+
+    public function view_highest_rating_stations()
+    {
+        $stations = Station::orderBy('average_rating', 'desc')->take(4)->get();
+
+        return response()->json([
+            "message" => "success",
+            "data" => $stations
+        ], 200);
+    }
 }

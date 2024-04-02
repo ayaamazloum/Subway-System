@@ -56,4 +56,5 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [UserController::class, "register"])->name('register');
     Route::get('view_stations', [UserStationController::class, "view_stations"]);
     Route::get('view_nearest_stations', [UserStationController::class, "view_nearest_stations"]);
+    Route::get('view_highest_rating_stations', [UserStationController::class, "view_highest_rating_stations"]);
 });
