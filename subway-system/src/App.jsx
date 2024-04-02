@@ -36,7 +36,7 @@ const App = () => {
   const location = useLocation();
 
   return (
-    <div className="app lexend-text">
+    <div className="app lexend-text white-bg">
       {cookie.get('user_type') && <NavBar />}
       <ToastContainer />
       <Routes>

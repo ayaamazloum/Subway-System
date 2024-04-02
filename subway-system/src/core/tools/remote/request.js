@@ -1,6 +1,5 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { useNavigate } from 'react-router-dom';
 
 const sendRequest = async (method, route, body) => {
 

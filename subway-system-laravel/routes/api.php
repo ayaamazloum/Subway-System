@@ -9,6 +9,7 @@ use App\Http\Controllers\Branch\BranchStationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserStationController;
 use App\Http\Controllers\UserRideController;
+use App\Http\Controllers\PassengerMessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,8 @@ Route::middleware('jwt.auth')->group(function () {
     Route::middleware('role:Passenger')->group(function () {
         Route::post('logout', [UserController::class, 'logout']);
         Route::post('reviews', [BranchReviewController::class, 'store']);
+        Route::get('passengermessages', [PassengerMessageController::class, 'index']);
+        Route::post('passengermessages', [PassengerMessageController::class, 'store']);
     });
 });
 Route::middleware('jwt.auth')->group(function () {
@@ -50,8 +53,6 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
     });
 });
-
-
 
 Route::middleware('guest')->group(function () {
     Route::post('login', [UserController::class, "login"])->name('login');
