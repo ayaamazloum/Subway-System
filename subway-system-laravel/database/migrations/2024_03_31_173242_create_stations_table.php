@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum("service_status", ["active", "closed"])->default("active");
             $table->double("latitude");
             $table->double("longitude");
+            $table->float("average_rating")->default(0);
             $table->timestamps();
         });
     }
