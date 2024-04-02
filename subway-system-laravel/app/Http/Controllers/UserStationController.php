@@ -28,7 +28,6 @@ class UserStationController extends Controller
             if ($ride) {
                 $station = $ride->station;
                 if ($station) {
-                    // Update the station's average rating
                     $station->average_rating = $averageRating;
                     $station->save();
                 }
@@ -43,7 +42,7 @@ class UserStationController extends Controller
 
     }
 
-    public function vew_recommended_stations(Request $request)
+    public function view_nearest_stations(Request $request)
     {
         $passenger = Passenger::find($request->input('passenger_id'));
 
@@ -61,8 +60,8 @@ class UserStationController extends Controller
         ->get();
 
         return response()->json([
-            "message" => "recommended stations found successfully",
-            "stations" => $stations
+            "message" => "success",
+            "data" => $stations
         ], 200);
     }
 }
