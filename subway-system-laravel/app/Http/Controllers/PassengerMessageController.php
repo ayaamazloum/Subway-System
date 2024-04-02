@@ -20,14 +20,6 @@ class PassengerMessageController extends Controller
     }
     public function store()
     {
-        $data = request()->validate([
-            'receiver_id' => 'required',
-            'message' => 'required|string',
-        ]);
-        $data['sender_id'] = auth()->id();
-        $data['receiver_id'] = request()->receiver_id;
-        $data['content'] = request()->content;
-        Message::create($data);
-        return response()->json(['status' => 'success', 'messsage' => "Message Sent Successfully"], 200);
+        
     }
 }
