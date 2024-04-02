@@ -1,6 +1,6 @@
 .home-page {
   position: relative;
-  background-color: transparent;
+  z-index: -1;
 }
 
 .hero-section {
