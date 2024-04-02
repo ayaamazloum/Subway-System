@@ -13,7 +13,6 @@ import UserRide from "./pages/UserRide/index.jsx";
 import UserProfile from "./pages/UserProfile/index.jsx";
 
 import { Route, Routes } from "react-router-dom";
-import { useState } from 'react';
 import { useLocation } from "react-router-dom";
 import SideBar from "./pages/Branch/Components/SideBar.jsx";
 import AdminSideBar from "./pages/Admin/Components/SideBar.jsx";
@@ -44,7 +43,7 @@ const App = () => {
         <Route path="/auth" element={<Authentication />}></Route>
         <Route path="/branchAuth" element={<BranchAuthentication />}></Route>
         <Route path="/stations" element={<Stations />} />
-        <Route path="/rides" element={<Rides />} />
+        <Route path="/rides" element={<UserRide />} />
         <Route path="/userstation" element={<UserStation />} />
         <Route path="/userride" element={<UserRide />} />
         <Route path="/userprofile" element={cookie.get('user_type') === 3 ? <UserProfile />  : <Authentication logout={true} />} />
