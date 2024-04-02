@@ -48,7 +48,8 @@ const Authentication = ({logout}) => {
                 <button className={`auth-tab lexend-text sm-text white-text secondary-bg  ${!isSignin && 'active-tab'}`}
                     onClick={() => setIsSignin(false)}>SIGN UP</button>
             </div>
-            {isSignin ? <SigninForm/> : <SignupForm handleSetSignIn={handleSetSignIn} />}
+            {isSignin ? <SigninForm /> : <SignupForm handleSetSignIn={handleSetSignIn} />}
+            <p onClick={()=>navigate('/')} className='guest xsm-text light-text'>Enter as a guest</p>
         </div>
         <img className='auth-img half-width' src={authimg}/>
     </div>

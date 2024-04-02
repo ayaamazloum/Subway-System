@@ -27,6 +27,8 @@ import BranchAuthentication from "./pages/Authentication/BranchAuthentication.js
 import Cookies from "universal-cookie";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import NavBar from "./components/Navbar/index.jsx";
+import Footer from "./components/Footer/index.jsx";
 
 const App = () => {
   const cookie = new Cookies();
@@ -35,6 +37,7 @@ const App = () => {
 
   return (
     <div className="app lexend-text">
+      {cookie.get('user_type') && <NavBar />}
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -46,6 +49,7 @@ const App = () => {
         <Route path="/userride" element={<UserRide />} />
         <Route path="/userprofile" element={cookie.get('user_type') === 3 ? <UserProfile />  : <Authentication logout={true} />} />
       </Routes>
+      {cookie.get('user_type') && <Footer />}
 
       {BranchRoutes.includes(location.pathname) && (
         <div className="d-flex page">
