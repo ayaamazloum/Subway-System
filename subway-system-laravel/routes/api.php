@@ -8,6 +8,7 @@ use App\Http\Controllers\Branch\BranchRideController;
 use App\Http\Controllers\Branch\BranchStationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserStationController;
+use App\Http\Controllers\UserRideController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -57,4 +58,5 @@ Route::middleware('guest')->group(function () {
     Route::get('view_stations', [UserStationController::class, "view_stations"]);
     Route::get('view_nearest_stations', [UserStationController::class, "view_nearest_stations"]);
     Route::get('view_highest_rating_stations', [UserStationController::class, "view_highest_rating_stations"]);
+    Route::get('view_station_rides/{station_id}', [UserRideController::class, "view_station_rides"]);
 });
