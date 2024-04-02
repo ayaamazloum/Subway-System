@@ -37,6 +37,7 @@ Route::middleware('jwt.auth')->group(function () {
 });
 Route::middleware('jwt.auth')->group(function () {
     Route::middleware('role:Passenger')->group(function () {
+        Route::post('logout', [UserController::class, 'logout']);
         Route::post('reviews', [BranchReviewController::class, 'store']);
     });
 });

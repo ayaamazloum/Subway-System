@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Passenger;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Role;
 use App\Models\User;
@@ -69,6 +68,15 @@ class UserController extends Controller
                 'token' => $token,
                 'type' => 'bearer',
             ]
+        ]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Successfully logged out',
         ]);
     }
 }
