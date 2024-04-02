@@ -289,3 +289,8 @@ a {
 .delayed {
   background-color: var(--orange-color) !important;
 }
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}

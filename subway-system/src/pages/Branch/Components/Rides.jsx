@@ -3,15 +3,20 @@ import Ride from "./Ride.jsx";
 import sendRequest from "../../../core/tools/remote/request.js";
 import PopUp from "../../../components/PopUp.jsx";
 import { requestMehods } from "../../../core/enums/requestMethods.js";
+import { toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
+
 const Rides = () => {
   const [rides, setRides] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [updateRide, setUpdateRide] = useState({
     id: 0,
     start_time: "",
     end_time: "",
     status: "",
   });
+
   const openPopup = (ride) => {
     setShowPopup(true);
     setUpdateRide({
@@ -25,6 +30,7 @@ const Rides = () => {
   const closePopup = () => {
     setShowPopup(false);
   };
+
   const handleSubmit = async () => {
     const response = await sendRequest(
       requestMehods.PUT,
@@ -32,26 +38,48 @@ const Rides = () => {
       updateRide
     );
     if (response.data.status === "success") {
-      sendRequest("GET", "rides").then((response) => {
-        setRides(response.data.data.rides);
-      });
+      sendRequest("GET", "rides")
+        .then((response) => {
+          setRides(response.data.data.rides);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching rides:", error);
+        });
+      toast.success(response.data.message);
       closePopup();
     }
   };
+
   useEffect(() => {
-    sendRequest("GET", "rides").then((response) => {
-      setRides(response.data.data.rides);
-    });
+    sendRequest("GET", "rides")
+      .then((response) => {
+        setRides(response.data.data.rides);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching rides:", error);
+      });
   }, []);
+
   return (
     <>
       <div className="content w-full">
         <h1 className="p-relative fs-30">Rides</h1>
-        <div className="rides-page d-grid gap-20 m-20">
-          {rides?.map((ride) => {
-            return <Ride key={ride.id} Ride={ride} openPopup={openPopup} />;
-          })}
-        </div>
+        {loading ? (
+          <BeatLoader
+            className="loader"
+            color={"#35b368"}
+            loading={loading}
+            size={50}
+          />
+        ) : (
+          <div className="rides-page d-grid gap-20 m-20">
+            {rides?.map((ride) => {
+              return <Ride key={ride.id} Ride={ride} openPopup={openPopup} />;
+            })}
+          </div>
+        )}
       </div>
       {showPopup && (
         <PopUp

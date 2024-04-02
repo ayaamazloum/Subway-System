@@ -3,11 +3,14 @@ import Station from "./Station";
 import sendRequest from "../../../core/tools/remote/request.js";
 import PopUp from "../../../components/PopUp";
 import { requestMehods } from "../../../core/enums/requestMethods.js";
+import { toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
 
 const Stations = () => {
   const [stations, setStations] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedStation, setSelectedStation] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [updateStation, setUpdateStation] = useState({
     facilities: "",
     service_status: "",
@@ -37,26 +40,41 @@ const Stations = () => {
     );
     if (response.data.status === "success") {
       closePopup();
-      sendRequest("GET", "stations").then((response) => {
-        setStations(response.data.data);
-      });
+      sendRequest("GET", "stations")
+        .then((response) => {
+          setStations(response.data.data);
+        })
+        .finally(() => {
+          setLoading(false); // Set loading to false after data is fetched
+        });
+      toast.success(response.data.message);
     }
   };
 
   useEffect(() => {
     sendRequest("GET", "stations").then((response) => {
       setStations(response.data.data);
+      setLoading(false); // Set loading to false after data is fetched
     });
   }, []);
 
   return (
     <>
       <h1 className="p-relative fs-30">Stations</h1>
-      <div className="stations-page p-relative d-grid gap-20 m-20">
-        {stations?.map((station) => (
-          <Station key={station.id} station={station} openPopup={openPopup} />
-        ))}
-      </div>
+      {loading ? ( // Show loader if loading state is true
+        <BeatLoader
+          className="loader"
+          color={"#35b368"}
+          loading={loading}
+          size={50} // 3 secs
+        />
+      ) : (
+        <div className="stations-page p-relative d-grid gap-20 m-20">
+          {stations.map((station) => (
+            <Station key={station.id} station={station} openPopup={openPopup} />
+          ))}
+        </div>
+      )}
       {showPopup && (
         <PopUp
           closePopup={closePopup}

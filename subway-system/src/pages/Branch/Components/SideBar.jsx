@@ -9,8 +9,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../Assets/logo.svg";
 import { useNavigate } from "react-router-dom";
+import sendRequest from "../../../core/tools/remote/request";
+import { requestMehods } from "../../../core/enums/requestMethods";
+import { toast } from "react-toastify";
+
 const SideBar = () => {
   const navigate = useNavigate();
+  const handleLogout = async () => {
+    sendRequest(requestMehods.POST, "logout").then((response) => {
+      if (response.data.status === "success") {
+        toast.success(response.data.message);
+        navigate("/auth");
+      }
+    });
+  };
   return (
     <div className="sidebar bg-white p-20 p-relative">
       <h3 className="p-relative txt-c mt-0">
@@ -66,7 +78,13 @@ const SideBar = () => {
           </a>
         </li>
         <li>
-          <a className="d-flex align-center fs-18 c-black rad-6 p-10">
+          <a
+            className="d-flex align-center fs-18 c-black rad-6 p-10"
+            onClick={(e) => {
+              e.preventDefault();
+              handleLogout();
+            }}
+          >
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             <span className="hide-mobile">Logout</span>
           </a>

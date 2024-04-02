@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminBranchController;
 use App\Http\Controllers\Admin\AdminCoinRequestController;
+use App\Http\Controllers\Admin\AdminOverViewController;
 use App\Http\Controllers\Branch\BranchMessageController;
 use App\Http\Controllers\Branch\BranchReviewController;
 use App\Http\Controllers\Branch\BranchRideController;
@@ -43,6 +44,7 @@ Route::middleware('jwt.auth')->group(function () {
 });
 Route::middleware('jwt.auth')->group(function () {
     Route::middleware('role:Admin')->group(function () {
+        Route::get('overview',[AdminOverViewController::class,'index']);
         Route::get('coinrequests', [AdminCoinRequestController::class, 'index']);
         Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
         Route::post('email', [AdminBranchController::class, 'store']);

@@ -46,7 +46,7 @@ class BranchReviewController extends Controller
         $review->save();
         return response()->json(['status' => 'success', 'message' => 'Review added successfully']);
     }
-    public function destory($id)
+    public function destroy($id)
     {
         $review = Review::findOrFail($id);
         $review->delete();
