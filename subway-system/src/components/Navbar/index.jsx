@@ -48,7 +48,6 @@ const NavBar = () => {
 
         const cookie = new Cookies();
         setIsLogged(cookie.get('token') && true);
-        console.log(isLogged);
     }, []);
     
     return (
