@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import UserRideCard from "./components/UserRideCard";
@@ -12,6 +12,23 @@ const UserRide = () => {
     const searchParams = new URLSearchParams(location.search);
     const stationName = searchParams.get("stationName");
     const locationName = searchParams.get("locationName");
+    const [rides, setRides] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://127.0.0.1:8000/api/view_station_rides/1");
+                if (!response.ok) {
+                    throw new Error("failed to fetch rides");
+                }
+                const data = await response.json();
+                setRides(data.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchData();
+    }, []);
 
     return (
         <div className="page light-bg flex column">
