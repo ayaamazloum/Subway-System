@@ -16,7 +16,7 @@ const UserRide = () => {
     const sendMessage = async () => {
         try {
             const res = await sendRequest(requestMehods.POST, "/passengermessages", {
-                'receiver_id': 22,
+                'receiver_id': 2,
                 'content': message
             });
             if (res.data.status === 'success') {
@@ -44,7 +44,7 @@ const UserRide = () => {
                     <input
                         onChange={(e) => setMessage(e.target.value)}
                         type="text"
-                        placeholder="Have anything to tell/ask us?"
+                        placeholder="Have anything to tell us?"
                         className="message-input" />
                 </div>
                 <div className="button-div">

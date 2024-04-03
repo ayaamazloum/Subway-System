@@ -14,7 +14,7 @@ const UserStation = () => {
             </div>
             <div className="padding">
                 <h2 className="padding-bottom">Nearest Stations</h2>
-                <div className="flex space-between">
+                <div className="flex center wrap">
                     <StationCard/>
                     <StationCard/>
                     <StationCard/>
@@ -24,7 +24,7 @@ const UserStation = () => {
             </div>
             <div className="padding">
                 <h2 className="padding-bottom">Highest Rating Stations</h2>
-                <div className="flex space-between">
+                <div className="flex center wrap">
                     <StationCard/>
                     <StationCard/>
                     <StationCard/>
@@ -33,7 +33,7 @@ const UserStation = () => {
             </div>
             <div className="padding">
                 <h2 className="padding-bottom">All Stations</h2>
-                <div className="flex space-between">
+                <div className="flex center wrap">
                     <StationCard/>
                     <StationCard/>
                     <StationCard/>
