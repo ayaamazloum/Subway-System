@@ -8,15 +8,29 @@ use Illuminate\Http\Request;
 
 class UserRideController extends Controller
 {
-    public function view_station_rides(Request $request, $station_id)
+    public function view_station_rides($station_id)
     {
-        $rides = Ride::where('start_station_id', $station_id)
+        $rides = Ride::with(['startStation', 'endStation', 'reviews'])
+        ->where('start_station_id', $station_id)
         ->orWhere('end_station_id', $station_id)
         ->get();
 
+        $transformedRides = $rides->map(function($ride) {
+            return [
+                'rating' => $ride->reviews->avg('rating'),
+                'start_station_longitude' => $ride->startStation->longitude,
+                'start_station_latitude' => $ride->startStation->latitude,
+                'end_station_longitude' => $ride->endStation->longitude,
+                'end_station_latitude' => $ride->endStation->latitude,
+                'start_time' => $ride->start_time,
+                'end_time' => $ride->end_time,
+                'capacity' => $ride->capacity,
+            ];
+        });
+
         return response()->json([
             "message" => "success",
-            "data" => $rides
+            "data" => $transformedRides
         ], 200);
     }
 
