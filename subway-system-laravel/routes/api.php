@@ -8,6 +8,7 @@ use App\Http\Controllers\Branch\BranchReviewController;
 use App\Http\Controllers\Branch\BranchRideController;
 use App\Http\Controllers\Branch\BranchStationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserCoinRequestController;
 use App\Http\Controllers\UserStationController;
 use App\Http\Controllers\UserRideController;
 use App\Http\Controllers\PassengerMessageController;
@@ -45,8 +46,8 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('reviews', [BranchReviewController::class, 'store']);
         Route::post('reviews', [BranchReviewController::class, 'store']);
         Route::get('refresh', [UserController::class, 'refresh']);
-        Route::get('usercoinrequests', [AdminCoinRequestController::class, 'index']);
-        Route::post('usercoinrequests', [AdminCoinRequestController::class, 'update']);
+        Route::get('usercoinrequests', [UserCoinRequestController::class, 'index']);
+        Route::post('usercoinrequests', [UserCoinRequestController::class, 'update']);
         Route::get('passengermessages', [PassengerMessageController::class, 'index']);
         Route::post('passengermessages', [PassengerMessageController::class, 'store']);
     });

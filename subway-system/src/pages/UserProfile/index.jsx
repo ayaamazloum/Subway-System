@@ -11,6 +11,7 @@ import Footer from "../../components/Footer";
 const UserProfile = () => {
     const [messages, setMessages] = useState();
     const [replies, setReplies] = useState();
+    const [name, setName] = useState();
     
     const messagesHistory = async () => {
     try {
@@ -18,6 +19,7 @@ const UserProfile = () => {
         if (res.data.status === 'success') {
             setMessages(res.data.passenger_messages);
             setReplies(res.data.branch_replies);
+            setName(res.data.name)
         }
         } catch (error) {
             console.error(error);
@@ -30,7 +32,8 @@ const UserProfile = () => {
 
     return (
         <div className="page light-bg flex column">
-            <NavBar/>
+            <NavBar />
+            <p className="user-name lg-text bold">{name}</p>
             <div className="button-div padding">
                 <button>Request Coins</button>
             </div>
@@ -38,10 +41,10 @@ const UserProfile = () => {
                 <h3 className="padding">Messages History</h3>
                 <div className="messages-container flex column gap-20 center wrap">
                     {messages?.map((message, i) => {
-                        return <Message key={i} sender={message.station_name} content={message.content} reply={false} />
+                        return <Message key={i} name={name} sender={message.station_name} content={message.content} reply={false} />
                     })}
                     {replies?.map((reply, i) => {
-                        return <Message key={i} sender={reply.station_name} content={reply.content} reply={true} />
+                        return <Message key={i} name={name} sender={reply.station_name} content={reply.content} reply={true} />
                     })}
                 </div>
                 <h3 className="padding">Rides History</h3>
