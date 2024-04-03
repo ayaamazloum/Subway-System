@@ -135,3 +135,7 @@ button {
 .small-card-padding {
   padding: 10px 15px;
 }
+
+input:focus {
+  outline: none;
+}

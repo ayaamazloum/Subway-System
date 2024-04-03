@@ -12,11 +12,21 @@
   margin-left: 10px;
 }
 
-.messages-container {
+.messages-container,
+.requests-container {
   margin: 0 40px;
 }
 
 .message-container {
   padding: 10px 20px;
   width: 80%;
+}
+
+.request-card {
+  width: 80%;
+}
+
+.amount-input {
+  width: 40vw;
+  max-width: 400px;
 }
