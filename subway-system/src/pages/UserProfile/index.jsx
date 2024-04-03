@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Message from "./components/Message";
 import NavBar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import CoinRequests from "./components/CoinRequests";
 
 const UserProfile = () => {
     const [messages, setMessages] = useState();
@@ -14,13 +15,13 @@ const UserProfile = () => {
     const [name, setName] = useState();
     
     const messagesHistory = async () => {
-    try {
-        const res = await sendRequest(requestMehods.GET, "/passengermessages", {});
-        if (res.data.status === 'success') {
-            setMessages(res.data.passenger_messages);
-            setReplies(res.data.branch_replies);
-            setName(res.data.name)
-        }
+        try {
+            const res = await sendRequest(requestMehods.GET, "/passengermessages", {});
+            if (res.data.status === 'success') {
+                setMessages(res.data.passenger_messages);
+                setReplies(res.data.branch_replies);
+                setName(res.data.name)
+            }
         } catch (error) {
             console.error(error);
         }
@@ -34,9 +35,7 @@ const UserProfile = () => {
         <div className="page light-bg flex column">
             <NavBar />
             <p className="user-name lg-text bold">{name}</p>
-            <div className="button-div padding">
-                <button>Request Coins</button>
-            </div>
+            <CoinRequests/>
             <div>
                 <h3 className="padding">Messages History</h3>
                 <div className="messages-container flex column gap-20 center wrap">

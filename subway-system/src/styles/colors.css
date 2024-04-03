@@ -1,5 +1,5 @@
 .primary-bg {
-  background-color: #35B368;
+  background-color: #35b368;
 }
 
 .secondary-bg {
@@ -7,7 +7,7 @@
 }
 
 .light-bg {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .white-bg {
@@ -23,7 +23,7 @@
 }
 
 .primary-text {
-  color: #35B368;
+  color: #35b368;
 }
 
 .secondary-text {
@@ -48,6 +48,10 @@
 
 .green-text {
   color: #2cda5c;
+}
+
+.yellow-text {
+  color: #e2c012;
 }
 
 .primary-shadow {

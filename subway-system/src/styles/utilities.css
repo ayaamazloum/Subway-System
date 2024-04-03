@@ -131,3 +131,7 @@ button {
 .wrap {
   flex-wrap: wrap;
 }
+
+.small-card-padding {
+  padding: 10px 15px;
+}
