@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowUpRightFromSquare,
@@ -11,13 +11,21 @@ import Cookies from "universal-cookie";
 import logo from "../../Branch/Assets/logo.svg";
 import { useNavigate } from "react-router-dom";
 import "../Styles/index.css";
+import sendRequest from "../../../core/tools/remote/request";
+import { requestMehods } from "../../../core/enums/requestMethods";
+import { toast } from "react-toastify";
 const SideBar = () => {
   const navigate = useNavigate();
   const logoutAdmin = () => {
-    const cookies = new Cookies();
-    cookies.remove("token");
-    cookies.remove("user_type");
-    navigate("/auth");
+    const response = sendRequest(requestMehods.POST, "logout").then(
+      (response) => {
+        navigate("/auth");
+        const cookies = new Cookies();
+        cookies.remove("token");
+        cookies.remove("user_type");
+        toast.success("Logged out successfully");
+      }
+    );
   };
   return (
     <div className="sidebar bg-white p-20 p-relative">

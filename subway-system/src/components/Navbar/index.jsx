@@ -48,7 +48,6 @@ const NavBar = () => {
 
         const cookie = new Cookies();
         setIsLogged(cookie.get('token') && true);
-        console.log(isLogged);
     }, []);
     
     return (
@@ -59,7 +58,7 @@ const NavBar = () => {
             }
             <div className={`nav-links flex row center gap-70 ${collapsedNavlinks ? 'collapsed-navlinks':''}`}>
                 <NavLink exact="true" to="/" activeclassname="active" className="sm-text secondary-text">Home</NavLink>
-                <NavLink exact="true" to="/stations" activeclassname="active-navitem" className="sm-text secondary-text">Stations</NavLink>
+                <NavLink exact="true" to="/userstations" activeclassname="active-navitem" className="sm-text secondary-text">Stations</NavLink>
                 {isLogged ? (<>
                     <NavLink exact="true" to="/userprofile" activeclassname="active-navitem" className="sm-text secondary-text">Profile</NavLink>
                     <button onClick={()=>handleAuth(true)} className='logout-btn sm-text semi-rounded primary-text white-bg'>Log out</button></>)

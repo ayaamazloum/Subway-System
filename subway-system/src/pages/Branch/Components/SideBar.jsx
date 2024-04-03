@@ -12,16 +12,16 @@ import { useNavigate } from "react-router-dom";
 import sendRequest from "../../../core/tools/remote/request";
 import { requestMehods } from "../../../core/enums/requestMethods";
 import { toast } from "react-toastify";
+import Cookies from "universal-cookie";
 
 const SideBar = () => {
   const navigate = useNavigate();
-  const handleLogout = async () => {
-    sendRequest(requestMehods.POST, "logout").then((response) => {
-      if (response.data.status === "success") {
-        toast.success(response.data.message);
-        navigate("/auth");
-      }
-    });
+  const handleLogout = () => {
+    navigate("/auth");
+    const cookies = new Cookies();
+    cookies.remove("token");
+    cookies.remove("user_type");
+    toast.success("Logged out successfully");
   };
   return (
     <div className="sidebar bg-white p-20 p-relative">

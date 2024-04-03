@@ -30,6 +30,15 @@
   width: 340px;
 }
 
+.guest {
+  margin-top: -20px;
+  cursor: pointer;
+}
+
+.guest:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 900px) {
   .auth-container {
     width: 100%;

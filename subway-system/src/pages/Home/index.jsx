@@ -9,8 +9,7 @@ import Footer from '../../components/Footer';
 
 const Home = () => {
     return <div className="home-page white-bg full-width full-height">
-        <NavBar />
-
+        <NavBar/>
         <div className="hero-section flex column center gap-40">
             <img className="hero-img" src={HeroImage} />
             <div className="overlay"></div>
@@ -56,8 +55,7 @@ const Home = () => {
                 </button>
             </div>
         </div>
-
-        <Footer/>
+        <Footer />
     </div>;
 }
 

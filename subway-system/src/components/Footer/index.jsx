@@ -7,7 +7,7 @@ import TwitterIcon from '../../assets/icons/twitter.svg'
 
 const Footer = () => {
   return (
-        <div className='footer flex row'>
+        <div className='footer white-bg flex row'>
             <div className="footer-right flex column gap-20">
                 <img className='footer-logo' src={Logo} />
                 <p className='xsm-text secodary-text'>The fastest and best subway rides experience worldwide.</p>

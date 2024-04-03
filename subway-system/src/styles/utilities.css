@@ -127,3 +127,7 @@ img {
 button {
   cursor: pointer;
 }
+
+.wrap {
+  flex-wrap: wrap;
+}

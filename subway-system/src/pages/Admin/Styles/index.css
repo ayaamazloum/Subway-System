@@ -3,23 +3,18 @@
   --blue-color: #2135e3;
   --blue-color-alt: #0d69d5;
   --orange-color: #f59e0b;
-  --green-color: #35b368;
+  --green-color: rgb(53, 179, 104);
   --red-color: #ed1313;
   --gray-color: #939393;
   --black-color: #282828;
   --white-color: #fff;
-}
-* {
-  box-sizing: border-box;
-}
-*:focus {
-  outline: none;
 }
 body {
   margin: 0;
   color: var(--black-color);
   font-family: "Lexend", sans-serif;
   background-color: #f1f5f9;
+  background-color: rgb(53, 179, 104);
 }
 a {
   text-decoration: none;

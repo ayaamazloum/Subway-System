@@ -31,7 +31,7 @@ const SignupForm = ({handleSetSignIn}) => {
       handleSetSignIn();
       toast.success('Signed up successfully. Now you can sign in into your account.');
     } catch (error) {
-      setError(error.response.data.errors.email);
+      setError(error.response.data.errors.email?error.response.data.errors.email:error.response.data.errors);
     }
   }
 

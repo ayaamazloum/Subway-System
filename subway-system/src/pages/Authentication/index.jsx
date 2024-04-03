@@ -9,6 +9,7 @@ import SigninForm from './Components/SigninForm';
 import SignupForm from './Components/SignupForm';
 import Cookies from "universal-cookie";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Authentication = ({logout}) => {
     const [isSignin, setIsSignin] = useState(true);
@@ -20,8 +21,10 @@ const Authentication = ({logout}) => {
             const response = await sendRequest(requestMehods.POST, "/logout");
             if (response.data.status === 'success') {
                 const cookie = new Cookies();
+                console.log(cookie.get('user_type'));
                 cookie.remove('token');
                 cookie.remove('user_type');
+                toast.error('Unauthorized access!');
             }
         } catch (error) {
             console.error('Error logging out:', error);
@@ -45,7 +48,8 @@ const Authentication = ({logout}) => {
                 <button className={`auth-tab lexend-text sm-text white-text secondary-bg  ${!isSignin && 'active-tab'}`}
                     onClick={() => setIsSignin(false)}>SIGN UP</button>
             </div>
-            {isSignin ? <SigninForm/> : <SignupForm handleSetSignIn={handleSetSignIn} />}
+            {isSignin ? <SigninForm /> : <SignupForm handleSetSignIn={handleSetSignIn} />}
+            <p onClick={()=>navigate('/')} className='guest xsm-text light-text'>Enter as a guest</p>
         </div>
         <img className='auth-img half-width' src={authimg}/>
     </div>
