@@ -44,16 +44,9 @@ const UserRide = () => {
             <div className="padding">
                 <h3 className="padding-bottom">List of Rides</h3>
                 <div className="flex space-between padding">
-                    <UserRideCard />
-                    <UserRideCard />
-                    <UserRideCard />
-                    <UserRideCard />
-                </div>
-                <div className="flex space-between padding">
-                    <UserRideCard />
-                    <UserRideCard />
-                    <UserRideCard />
-                    <UserRideCard />
+                    {rides.map((ride, index) => (
+                        <UserRideCard key={index} ride={ride} />
+                    ))}
                 </div>
             </div>
 
