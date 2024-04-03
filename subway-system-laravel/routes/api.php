@@ -73,4 +73,5 @@ Route::middleware('guest')->group(function () {
     Route::get('view_nearest_stations', [UserStationController::class, "view_nearest_stations"]);
     Route::get('view_highest_rating_stations', [UserStationController::class, "view_highest_rating_stations"]);
     Route::get('view_station_rides/{station_id}', [UserRideController::class, "view_station_rides"]);
+    Route::get('view_passenger_rides/{passenger_id}', [UserRideController::class, "view_passenger_rides"]);
 });
