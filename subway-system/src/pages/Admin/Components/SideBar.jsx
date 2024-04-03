@@ -6,11 +6,19 @@ import {
   faDollarSign,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
+import Cookies from "universal-cookie";
+
 import logo from "../../Branch/Assets/logo.svg";
 import { useNavigate } from "react-router-dom";
 import "../Styles/index.css";
 const SideBar = () => {
   const navigate = useNavigate();
+  const logoutAdmin = () => {
+    const cookies = new Cookies();
+    cookies.remove("token");
+    cookies.remove("user_type");
+    navigate("/auth");
+  };
   return (
     <div className="sidebar bg-white p-20 p-relative">
       <h3 className="p-relative txt-c mt-0">
@@ -54,7 +62,13 @@ const SideBar = () => {
           </a>
         </li>
         <li>
-          <a className="d-flex align-center fs-18 c-black rad-6 p-10">
+          <a
+            className="d-flex align-center fs-18 c-black rad-6 p-10"
+            onClick={(e) => {
+              e.preventDefault();
+              logoutAdmin();
+            }}
+          >
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             <span className="hide-mobile">Logout</span>
           </a>

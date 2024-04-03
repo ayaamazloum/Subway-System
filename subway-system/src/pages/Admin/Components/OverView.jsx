@@ -1,23 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/index.css";
 import PassengerChart from "./Charts/PassengerLineChart";
 import TicketChart from "./Charts/TicketBarChart";
 import CoinChart from "./Charts/CoinDonutChart";
+import sendRequest from "../../../core/tools/remote/request";
+import { requestMehods } from "../../../core/enums/requestMethods";
 const OverView = () => {
-  const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-  const data = [5, 8, 3, 12, 10, 15];
+  const [tickedData, setTickedData] = useState([]);
+  const [passengerData, setPassengerData] = useState([]);
+  const [coinRequestData, setCoinRequestData] = useState([]);
+  const getData = () => {
+    const response = sendRequest(requestMehods.GET, "overview").then(
+      (response) => {
+        if (response.data.status === "success") {
+          console.log(response.data.data.passengersByMonth);
+          setCoinRequestData(response.data.data.coinRequestsByStatus);
+          setPassengerData(response.data.data.passengersByMonth);
+          setTickedData(response.data.data.ticketsByMonth);
+        }
+      }
+    );
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div className="content w-full">
       <h1 className="p-relative fs-30">OverView</h1>
       <div className="charts">
         <div className="chart-1">
-          <PassengerChart labels={labels} data={data} />
+          <PassengerChart data={passengerData} />
         </div>
         <div className="chart-2">
-          <CoinChart data={data} labels={labels} />
+          <CoinChart data={coinRequestData} />
         </div>
         <div className="chart-3">
-          <TicketChart data={data} labels={labels} />
+          <TicketChart data={tickedData} />
         </div>
       </div>
     </div>

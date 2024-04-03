@@ -14,10 +14,10 @@ class AdminOverViewController extends Controller
     public function index()
     {
         $registeredPassengersByMonth = Passenger::select(
-            DB::raw('MONTH(created_at) as month'),
+            DB::raw('MONTHNAME(created_at) as month'),
             DB::raw('COUNT(*) as count')
         )
-            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->groupBy(DB::raw('MONTHNAME(created_at)'))
             ->get();
         $coinRequestsByStatus = CoinRequest::select(
             'status',
@@ -26,10 +26,10 @@ class AdminOverViewController extends Controller
             ->groupBy('status')
             ->get();
         $ticketsByMonth = Ticket::select(
-            DB::raw('MONTH(created_at) as month'),
+            DB::raw('MONTHNAME(created_at) as month'),
             DB::raw('COUNT(*) as count')
         )
-            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->groupBy(DB::raw('MONTHNAME(created_at)'))
             ->get();
         return response()->json(['status' => 'success', 'data' => [
             'passengersByMonth' => $registeredPassengersByMonth,

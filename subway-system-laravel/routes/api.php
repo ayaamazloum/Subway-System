@@ -33,7 +33,6 @@ Route::middleware('jwt.auth')->group(function () {
         Route::put('stations/{id}', [BranchStationController::class, 'update']);
         Route::get('rides', [BranchRideController::class, 'index']);
         Route::put('rides/{id}', [BranchRideController::class, 'update']);
-        Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
     });
 });
 Route::middleware('jwt.auth')->group(function () {
@@ -59,6 +58,7 @@ Route::middleware('jwt.auth')->group(function () {
 
 
 Route::middleware('guest')->group(function () {
+    Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
     Route::post('register', [UserController::class, "register"])->name('register');
     Route::post('login', [UserController::class, "login"])->name('login');
 });
