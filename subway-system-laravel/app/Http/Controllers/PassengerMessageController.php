@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\Branch;
+use App\Models\User;
 use App\Models\Station;
 use Illuminate\Support\Facades\DB;
 
@@ -12,13 +13,16 @@ class PassengerMessageController extends Controller
 {
     public function index()
     {
+        $user_id = auth()->id();
+        $user_name = User::where('id', $user_id)->first()->name;
         $passenger_messages = DB::table('messages')
             ->join('branches', 'messages.receiver_id', '=', 'branches.user_id')
             ->join('stations', 'branches.id', '=', 'stations.branch_id')
-            ->where('messages.sender_id', '=', auth()->id())
+            ->where('messages.sender_id', '=', $user_id)
             ->select('messages.content', 'stations.name as station_name')
             ->distinct()
             ->get();
+
         $branch_replies = DB::table('messages')
             ->join('users', 'messages.receiver_id', '=', 'users.id')
             ->join('branches', 'messages.sender_id', '=', 'branches.user_id')
@@ -27,8 +31,10 @@ class PassengerMessageController extends Controller
             ->select('messages.content', 'stations.name as station_name')
             ->distinct()
             ->get();
+
         return response()->json([
-            'status' => 'success',
+            'status' => 'success', 
+            'name' => $user_name,
             'passenger_messages' => $passenger_messages,
             'branch_replies' => $branch_replies
         ], 200);

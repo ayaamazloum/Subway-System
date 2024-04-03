@@ -9,9 +9,28 @@ class UserCoinRequestController extends Controller
 {
     public function index()
     {
-        $requests = CoinRequest::where('passenger_id', auth()->id())->get();
+        $user_id = auth()->id();
+        $requests = CoinRequest::where('passenger_id', $user_id)->get();
         $responseData = [];
+        foreach ($requests as $request) {
+            $requestData = [
+                'amount' => $request->amount,
+                'coin_request_status' => $request->status,
+                'date' => $request->created_at
+            ];
+            $responseData[] = $requestData;
+        }
+        return response()->json(['status' => 'success', 'coin_requests' => $responseData]);
+    }
+    public function store()
+    {
+        $data = request()->validate(['amount' => 'required']);
+        $user_id = auth()->id();
 
-        return response()->json(['status' => 'success', 'data' => $requests]);
+        $data['amount'] = request()->amount;
+        $data['passenger_id'] = $user_id;
+
+        CoinRequest::create($data);
+        return response()->json(['status' => 'success', 'messsage' => "Request sent successfully"], 200);
     }
 }

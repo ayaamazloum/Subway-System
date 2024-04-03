@@ -4,10 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Ride;
 use App\Models\Passenger;
+use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserRideController extends Controller
 {
+    public function store()
+    {
+        $data = request()->validate([
+            'content' => 'required|string',
+            'rating' => 'required',
+            'ride_id' => ['required', Rule::exists('rides', 'id')]
+        ]);
+        $user_id = auth()->user()->id;
+        $passenger = Passenger::where('user_id', $user_id)->first();
+        $passenger_id = $passenger->id;
+        $review = new Review();
+        $review->passenger_id = $passenger_id;
+        $review->ride_id = $data['ride_id'];
+        $review->rating = $data['rating'];
+        $review->content = $data['content'];
+        $review->save();
+        return response()->json(['status' => 'success', 'message' => 'Review created successfully']);
+    }
     public function view_station_rides($station_id)
     {
         $rides = Ride::with(['startStation', 'endStation', 'reviews'])
@@ -62,6 +82,7 @@ class UserRideController extends Controller
                 'start_time' => $ride->start_time,
                 'end_time' => $ride->end_time,
                 'capacity' => $ride->capacity,
+                'id' => $ride->id,
                 'rating' => $this->calculateAverageRating($ride->reviews),
             ];
         });

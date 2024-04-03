@@ -8,6 +8,7 @@ use App\Http\Controllers\Branch\BranchReviewController;
 use App\Http\Controllers\Branch\BranchRideController;
 use App\Http\Controllers\Branch\BranchStationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserCoinRequestController;
 use App\Http\Controllers\UserStationController;
 use App\Http\Controllers\UserRideController;
 use App\Http\Controllers\PassengerMessageController;
@@ -45,11 +46,12 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('reviews', [BranchReviewController::class, 'store']);
         Route::post('reviews', [BranchReviewController::class, 'store']);
         Route::get('refresh', [UserController::class, 'refresh']);
-        Route::get('usercoinrequests', [AdminCoinRequestController::class, 'index']);
-        Route::post('usercoinrequests', [AdminCoinRequestController::class, 'update']);
+        Route::get('usercoinrequests', [UserCoinRequestController::class, 'index']);
+        Route::post('usercoinrequests', [UserCoinRequestController::class, 'store']);
         Route::get('passengermessages', [PassengerMessageController::class, 'index']);
         Route::post('passengermessages', [PassengerMessageController::class, 'store']);
         Route::get('view_passenger_rides', [UserRideController::class, "view_passenger_rides"]);
+        Route::post('view_passenger_rides', [UserRideController::class, "store"]);
     });
 });
 Route::middleware('jwt.auth')->group(function () {
@@ -74,5 +76,4 @@ Route::middleware('guest')->group(function () {
     Route::get('view_nearest_stations', [UserStationController::class, "view_nearest_stations"]);
     Route::get('view_highest_rating_stations', [UserStationController::class, "view_highest_rating_stations"]);
     Route::get('view_station_rides/{station_id}', [UserRideController::class, "view_station_rides"]);
-   
 });

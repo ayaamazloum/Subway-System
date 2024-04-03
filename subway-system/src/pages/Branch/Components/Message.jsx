@@ -10,6 +10,18 @@ const Message = ({ message, deleteMessage }) => {
     content: "",
     receiver_id: message.sender_id,
   });
+  const convertDateFormat = (datetimeString) => {
+    const dateTime = new Date(datetimeString);
+
+    const day = dateTime.getDate();
+    const month = dateTime.getMonth() + 1;
+    const year = dateTime.getFullYear();
+
+    const formattedDay = day < 10 ? "0" + day : day;
+    const formattedMonth = month < 10 ? "0" + month : month;
+
+    return formattedDay + "-" + formattedMonth + "-" + year;
+  };
   const createMessage = () => {
     const response = sendRequest(
       requestMehods.POST,
@@ -31,7 +43,9 @@ const Message = ({ message, deleteMessage }) => {
         <div className="p-20 between-flex">
           <div className="head">
             <h4 className="m-0 fs-18">{message.sender_name}</h4>
-            <p className="fs-13 c-gray mt-5 ">12-02-2024</p>
+            <p className="fs-13 c-gray mt-5 ">
+              {convertDateFormat(message.created_at)}
+            </p>
           </div>
           <div className="center-flex gap-5 actions">
             <FontAwesomeIcon

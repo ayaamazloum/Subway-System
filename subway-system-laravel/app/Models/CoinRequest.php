@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CoinRequest extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'amount',
+        'passenger_id'
+    ];
     public function passenger(){
         return $this->belongsTo(Passenger::class);
     }
