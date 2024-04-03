@@ -12,12 +12,13 @@ const UserRide = () => {
     const searchParams = new URLSearchParams(location.search);
     const stationName = searchParams.get("stationName");
     const locationName = searchParams.get("locationName");
+    const stationId = searchParams.get("id");
     const [rides, setRides] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:8000/api/view_station_rides/1");
+                const response = await fetch(`http://127.0.0.1:8000/api/view_station_rides/${stationId}`);
                 if (!response.ok) {
                     throw new Error("failed to fetch rides");
                 }

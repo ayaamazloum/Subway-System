@@ -49,7 +49,7 @@ const StationCard = ( {station} ) => {
         <div className="flex center button-div">
             <button
             onClick={() => {
-                navigate(`/userride?stationName=${name}&locationName=${locationName}`);
+                navigate(`/userride?stationName=${name}&locationName=${locationName}&id=${id}`);
             }}
             >View Rides</button>
         </div>
