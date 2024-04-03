@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CoinRequest;
+use App\Models\Passenger;
 
 class UserCoinRequestController extends Controller
 {
@@ -25,10 +26,10 @@ class UserCoinRequestController extends Controller
     public function store()
     {
         $data = request()->validate(['amount' => 'required']);
-        $user_id = auth()->id();
+        $passenger = Passenger::where('user_id', auth()->id())->first();
 
         $data['amount'] = request()->amount;
-        $data['passenger_id'] = $user_id;
+        $data['passenger_id'] = $passenger->id;
 
         CoinRequest::create($data);
         return response()->json(['status' => 'success', 'messsage' => "Request sent successfully"], 200);
