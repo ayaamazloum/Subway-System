@@ -33,6 +33,7 @@ Route::middleware('jwt.auth')->group(function () {
         Route::put('stations/{id}', [BranchStationController::class, 'update']);
         Route::get('rides', [BranchRideController::class, 'index']);
         Route::put('rides/{id}', [BranchRideController::class, 'update']);
+        Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
     });
 });
 Route::middleware('jwt.auth')->group(function () {
@@ -48,7 +49,9 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('coinrequests', [AdminCoinRequestController::class, 'index']);
         Route::put('coinrequests/{id}', [AdminCoinRequestController::class, 'update']);
         Route::delete('coinrequests/{id}', [AdminCoinRequestController::class, 'destroy']);
-        Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
+        Route::get('branches', [AdminBranchController::class, 'index']);
+        Route::put('branches/{id}', [AdminBranchController::class, 'update']);
+        Route::delete('branches/{id}', [AdminBranchController::class, 'destroy']);
         Route::post('email', [AdminBranchController::class, 'store']);
     });
 });

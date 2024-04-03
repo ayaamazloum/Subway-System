@@ -232,3 +232,11 @@ a {
   color: var(--white-color);
   font-size: 14px;
 }
+.active {
+  cursor: default !important;
+  background-color: var(--green-color) !important;
+}
+.closed {
+  cursor: default !important;
+  background-color: var(--red-color) !important;
+}

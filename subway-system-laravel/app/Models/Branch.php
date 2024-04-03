@@ -12,4 +12,8 @@ class Branch extends Model
     {
         return $this->hasOne(Station::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

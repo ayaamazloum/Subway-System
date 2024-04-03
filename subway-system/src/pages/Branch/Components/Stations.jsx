@@ -45,7 +45,7 @@ const Stations = () => {
           setStations(response.data.data);
         })
         .finally(() => {
-          setLoading(false); // Set loading to false after data is fetched
+          setLoading(false); 
         });
       toast.success(response.data.message);
     }
@@ -54,19 +54,19 @@ const Stations = () => {
   useEffect(() => {
     sendRequest("GET", "stations").then((response) => {
       setStations(response.data.data);
-      setLoading(false); // Set loading to false after data is fetched
+      setLoading(false); 
     });
   }, []);
 
   return (
     <>
       <h1 className="p-relative fs-30">Stations</h1>
-      {loading ? ( // Show loader if loading state is true
+      {loading ? ( 
         <BeatLoader
           className="loader"
           color={"#35b368"}
           loading={loading}
-          size={50} // 3 secs
+          size={50} 
         />
       ) : (
         <div className="stations-page p-relative d-grid gap-20 m-20">
