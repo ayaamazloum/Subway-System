@@ -44,8 +44,10 @@ Route::middleware('jwt.auth')->group(function () {
 });
 Route::middleware('jwt.auth')->group(function () {
     Route::middleware('role:Admin')->group(function () {
-        Route::get('overview',[AdminOverViewController::class,'index']);
+        Route::get('overview', [AdminOverViewController::class, 'index']);
         Route::get('coinrequests', [AdminCoinRequestController::class, 'index']);
+        Route::put('coinrequests/{id}', [AdminCoinRequestController::class, 'update']);
+        Route::delete('coinrequests/{id}', [AdminCoinRequestController::class, 'destroy']);
         Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
         Route::post('email', [AdminBranchController::class, 'store']);
     });
