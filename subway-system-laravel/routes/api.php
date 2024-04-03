@@ -45,6 +45,8 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('reviews', [BranchReviewController::class, 'store']);
         Route::post('reviews', [BranchReviewController::class, 'store']);
         Route::get('refresh', [UserController::class, 'refresh']);
+        Route::get('usercoinrequests', [AdminCoinRequestController::class, 'index']);
+        Route::post('usercoinrequests', [AdminCoinRequestController::class, 'update']);
         Route::get('passengermessages', [PassengerMessageController::class, 'index']);
         Route::post('passengermessages', [PassengerMessageController::class, 'store']);
     });
