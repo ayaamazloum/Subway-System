@@ -8,9 +8,10 @@
 }
 
 .messages-container {
-  margin: 40px;
+  margin: 0 40px;
 }
 
 .message-container {
   padding: 10px 20px;
+  width: 80%;
 }

@@ -36,7 +36,7 @@ const UserProfile = () => {
             </div>
             <div>
                 <h3 className="padding">Messages History</h3>
-                <div className="messages-container flex gap center wrap">
+                <div className="messages-container flex column gap-20 center wrap">
                     {messages?.map((message, i) => {
                         return <Message key={i} sender={message.station_name} content={message.content} reply={false} />
                     })}
