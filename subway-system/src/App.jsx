@@ -26,29 +26,30 @@ import BranchAuthentication from "./pages/Authentication/BranchAuthentication.js
 import Cookies from "universal-cookie";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import NavBar from "./components/Navbar/index.jsx";
-import Footer from "./components/Footer/index.jsx";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const cookie = new Cookies();
-
+  const [userType, setUserType] = useState();
   const location = useLocation();
+
+  useEffect(() => {
+    setUserType(cookie.get('user_type'));
+   }, []);
 
   return (
     <div className="app lexend-text white-bg">
-      {cookie.get('user_type') && <NavBar />}
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<Authentication />}></Route>
-        <Route path="/branchAuth" element={<BranchAuthentication />}></Route>
-        <Route path="/stations" element={<Stations />} />
-        <Route path="/rides" element={<UserRide />} />
-        <Route path="/userstation" element={<UserStation />} />
-        <Route path="/userride" element={<UserRide />} />
-        <Route path="/userprofile" element={cookie.get('user_type') === 3 ? <UserProfile />  : <Authentication logout={true} />} />
+        <Route path="/" element={userType === 3 || userType == null ? <Home /> : <Authentication logout={true} />} />
+        <Route path="/auth" element={userType== null && <Authentication />}></Route>
+        <Route path="/branchAuth" element={userType == null ? <BranchAuthentication /> : <Authentication logout={true}/>}></Route>
+        <Route path="/stations" element={userType === 3 || userType == null ? <Stations /> : <Authentication logout={true}/>} />
+        <Route path="/rides" element={userType === 3 || userType == null ? <UserRide /> : <Authentication logout={true}/>} />
+        <Route path="/userstations" element={userType === 3 || userType == null ? <UserStation /> : <Authentication logout={true} />} />
+        <Route path="/userride" element={userType === 3 || userType == null ? <UserRide /> : <Authentication logout={true} />} />
+        <Route path="/userprofile" element={userType === 3 ? <UserProfile />  : <Authentication logout={true} />} />
       </Routes>
-      {cookie.get('user_type') && <Footer />}
 
       {BranchRoutes.includes(location.pathname) && (
         <div className="d-flex page">

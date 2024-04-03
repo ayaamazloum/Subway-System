@@ -5,6 +5,8 @@ import sendRequest from '../../core/tools/remote/request';
 import { requestMehods } from "../../core/enums/requestMethods";
 import { useEffect, useState } from "react";
 import Message from "./components/Message";
+import NavBar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 const UserProfile = () => {
     const [messages, setMessages] = useState();
@@ -28,17 +30,18 @@ const UserProfile = () => {
 
     return (
         <div className="page light-bg flex column">
+            <NavBar/>
             <div className="button-div padding">
                 <button>Request Coins</button>
             </div>
             <div>
                 <h3 className="padding">Messages History</h3>
                 <div className="messages-container flex gap center wrap">
-                    {messages?.map((message) => {
-                        return <Message sender={message.station_name} content={message.content} reply={false} />
+                    {messages?.map((message, i) => {
+                        return <Message key={i} sender={message.station_name} content={message.content} reply={false} />
                     })}
-                    {replies?.map((reply) => {
-                        return <Message sender={reply.station_name} content={reply.content} reply={true} />
+                    {replies?.map((reply, i) => {
+                        return <Message key={i} sender={reply.station_name} content={reply.content} reply={true} />
                     })}
                 </div>
                 <h3 className="padding">Rides History</h3>
@@ -49,6 +52,7 @@ const UserProfile = () => {
                     <RideCardReview />
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }

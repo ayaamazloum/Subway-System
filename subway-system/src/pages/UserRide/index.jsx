@@ -9,6 +9,8 @@ import sendRequest from '../../core/tools/remote/request';
 import { requestMehods } from "../../core/enums/requestMethods";
 import { toast } from 'react-toastify';
 import { useState } from "react";
+import NavBar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 const UserRide = () => {
     const [message, setMessage] = useState('');
@@ -29,6 +31,7 @@ const UserRide = () => {
 
     return (
         <div className="page light-bg flex column">
+            <NavBar/>
             <div className="flex space-between">
                 <div>
                     <h1>Station 1</h1>
@@ -66,7 +69,7 @@ const UserRide = () => {
                     <UserRideCard />
                 </div>
             </div>
-
+            <Footer/>
         </div>
     )
 }
