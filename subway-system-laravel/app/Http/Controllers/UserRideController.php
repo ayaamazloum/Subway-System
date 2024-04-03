@@ -11,17 +11,17 @@ class UserRideController extends Controller
     public function view_station_rides($station_id)
     {
         $rides = Ride::with(['startStation', 'endStation', 'reviews'])
-        ->where('start_station_id', $station_id)
-        ->orWhere('end_station_id', $station_id)
-        ->get();
+            ->where('start_station_id', $station_id)
+            ->orWhere('end_station_id', $station_id)
+            ->get();
 
-        $transformedRides = $rides->map(function($ride) {
+        $transformedRides = $rides->map(function ($ride) {
             return [
                 'rating' => $ride->reviews->avg('rating'),
                 'start_station_longitude' => $ride->startStation->longitude,
                 'start_station_latitude' => $ride->startStation->latitude,
-                'end_station_longitude' => $ride->endStation->longitude,
-                'end_station_latitude' => $ride->endStation->latitude,
+                'start_station_id' => $ride->endStation->id,
+                'end_station_id' => $ride->endStation->id,
                 'start_time' => $ride->start_time,
                 'end_time' => $ride->end_time,
                 'capacity' => $ride->capacity,
@@ -34,28 +34,31 @@ class UserRideController extends Controller
         ], 200);
     }
 
-    public function view_passenger_rides($passenger_id)
+    public function view_passenger_rides()
     {
-        $passenger = Passenger::find($passenger_id);
+        $passenger = Passenger::where('user_id', auth()->id())->first();
+        $passenger_id = $passenger->id;
 
-        if(!$passenger) {
+        if (!$passenger) {
             return response()->json([
                 "message" => "passenger not found"
             ], 404);
         }
 
         $rides = Ride::with('reviews')
-                    ->whereHas('tickets', function($query) use($passenger_id) {
-                        $query->where('passenger_id', $passenger_id);
-                    })
-                    ->get();
+            ->whereHas('tickets', function ($query) use ($passenger_id) {
+                $query->where('passenger_id', $passenger_id);
+            })
+            ->get();
 
-        $formattedRides = $rides->map(function($ride) {
+        $formattedRides = $rides->map(function ($ride) {
             return [
-                'start_stations_latitude' => $ride->startStation->latitude,
+                'start_station_latitude' => $ride->startStation->latitude,
                 'start_station_longitude' => $ride->startStation->longitude,
                 'end_station_latitude' => $ride->endStation->latitude,
                 'end_station_longitude' => $ride->endStation->longitude,
+                'start_station_id' => $ride->startStation->id,
+                'end_station_id' => $ride->endStation->id,
                 'start_time' => $ride->start_time,
                 'end_time' => $ride->end_time,
                 'capacity' => $ride->capacity,
