@@ -1,6 +1,5 @@
 import './style.css';
 import NavBar from "../../components/Navbar";
-
 import Footer from '../../components/Footer';
 import Hero from './Components/Hero';
 import BranchesMap from './Components/BranchesMap';
