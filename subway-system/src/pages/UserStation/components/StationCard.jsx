@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faStar, faClock, faRestroom, faWheelchair, faWifi } from "@fortawesome/free-solid-svg-icons";
 
@@ -34,8 +35,8 @@ const StationCard = ( {station} ) => {
                 <p>{locationName}</p>
             </div>
             <div className="flex">
-                <FontAwesomeIcon icon={faStar} className="primary-text"/>
                 <p>{station.average_rating}</p>
+                <FontAwesomeIcon icon={faStar} className="primary-text"/>
             </div>
         </div>
         <div className="flex small-gap">

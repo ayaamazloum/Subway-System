@@ -59,29 +59,20 @@ const UserStation = () => {
             <div className="padding">
                 <h2 className="padding-bottom">Nearest Stations</h2>
                 <div className="flex space-between">
-                    <StationCard/>
-                    <StationCard/>
-                    <StationCard/>
-                    <StationCard/>
+                    {nearestStations.map(station => <StationCard key={station.id} station={station} />)}
                 </div>
                 
             </div>
             <div className="padding">
                 <h2 className="padding-bottom">Highest Rating Stations</h2>
                 <div className="flex space-between">
-                    <StationCard/>
-                    <StationCard/>
-                    <StationCard/>
-                    <StationCard/>
+                    {highestRatingStations.map(station => <StationCard key={station.id} station={station} />)}
                 </div>
             </div>
             <div className="padding">
                 <h2 className="padding-bottom">All Stations</h2>
                 <div className="flex space-between">
-                    <StationCard/>
-                    <StationCard/>
-                    <StationCard/>
-                    <StationCard/>
+                    {allStations.map(station => <StationCard key={station.id} station={station} />)}
                 </div>
             </div>
         </div>
