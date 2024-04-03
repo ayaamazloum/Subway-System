@@ -1,26 +1,40 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-const Review = () => {
+const Review = ({ review, handleDelete }) => {
+  const convertDateFormat = (datetimeString) => {
+    const dateTime = new Date(datetimeString);
+
+    const day = dateTime.getDate();
+    const month = dateTime.getMonth() + 1;
+    const year = dateTime.getFullYear();
+
+    const formattedDay = day < 10 ? "0" + day : day;
+    const formattedMonth = month < 10 ? "0" + month : month;
+
+    return formattedDay + "-" + formattedMonth + "-" + year;
+  };
   return (
     <>
       <div className="review  bg-white rad-6 p-relative">
         <div className="p-20 between-flex">
           <div className="head">
-            <h4 className="m-0 fs-18">Name</h4>
-            <p className="fs-13 c-gray mt-5 ">12-02-2024</p>
+            <h4 className="m-0 fs-18">{review.passenger_name}</h4>
+            <p className="fs-13 c-gray mt-5 ">
+              {convertDateFormat(review.created_at)}
+            </p>
           </div>
           <div className="center-flex gap-5 actions">
-            <FontAwesomeIcon icon={faTrashCan} />
+            <FontAwesomeIcon
+              icon={faTrashCan}
+              onClick={() => {
+                handleDelete(review.id);
+              }}
+            />
           </div>
         </div>
         <div className="info between-flex">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
-            deleniti ut harum laborum asperiores expedita officia. Eius enim
-            culpa, corporis iste eligendi ducimus odit accusamus inventore
-            voluptas iure alias distinctio?
-          </p>
+          <p>{review.content}</p>
         </div>
       </div>
     </>

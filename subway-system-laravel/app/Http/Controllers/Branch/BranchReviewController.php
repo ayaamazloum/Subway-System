@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
 use App\Models\Passenger;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -12,22 +13,20 @@ class BranchReviewController extends Controller
 {
     public function index()
     {
-        $passengers = Passenger::with(['reviews', 'user:id,name,email'])->get();
+        $user_id = auth()->id();
+        $branch = Branch::where('user_id', $user_id)->first();
+        $branchId = $branch->id;
 
-        $responseData = [];
-
-        foreach ($passengers as $passenger) {
-            $passengerData = [
-                'name' => $passenger->user->name,
-                'email' => $passenger->user->email,
-                'reviews' => [
-                    'reviews' => $passenger->reviews,
-                ]
-            ];
-            $responseData[] = $passengerData;
-        }
-
-        return response()->json(['status' => 'success', 'data' => $responseData]);
+        $reviews = DB::table('reviews')
+            ->join('passengers', 'reviews.passenger_id', '=', 'passengers.id')
+            ->join('users', 'passengers.user_id', '=', 'users.id')
+            ->join('rides', 'reviews.ride_id', '=', 'rides.id')
+            ->join('stations', 'rides.start_station_id', '=', 'stations.id')
+            ->join('branches', 'stations.branch_id', '=', 'branches.id')
+            ->select('reviews.*', 'users.name as passenger_name')
+            ->where('branches.id', $branchId)
+            ->get();
+        return response()->json(['status' => 'success', 'data' => $reviews]);
     }
     public function store(Request $request)
     {
@@ -47,7 +46,7 @@ class BranchReviewController extends Controller
         $review->save();
         return response()->json(['status' => 'success', 'message' => 'Review added successfully']);
     }
-    public function destory($id)
+    public function destroy($id)
     {
         $review = Review::findOrFail($id);
         $review->delete();

@@ -28,8 +28,25 @@ class AdminCoinRequestController extends Controller
     public function update($id, Request $request)
     {
         $coinRequest = CoinRequest::findOrFail($id);
+        $oldStatus = $coinRequest->status;
+
         $coinRequest->status = $request->status;
         $coinRequest->save();
+
+        if ($request->status === 'Approved' && $oldStatus !== 'Approved') {
+
+            $passenger = $coinRequest->passenger;
+
+            $newAmount = $coinRequest->amount;
+            $passenger->wallet_balance += $newAmount;
+            $passenger->save();
+        }
         return response()->json(['status' => 'success', 'message' => 'Coin request updated successfully']);
+    }
+    public function destroy($id)
+    {
+        $coinRequest = CoinRequest::findOrFail($id);
+        $coinRequest->delete();
+        return response()->json(['status' => 'success', 'message' => 'Coin request deleted successfully']);
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->time("start_time");
             $table->time("end_time");
             $table->integer("capacity");
+            $table->enum('status', ['ongoing', 'delyaed', 'canceled'])->default('ongoing');
             $table->timestamps();
         });
     }

@@ -20,16 +20,15 @@ class BranchStationController extends Controller
         $branch_id = $branch->id;
         $branchWithStations = Branch::with('station')->find($branch_id); // Use with() to eager load the stations
         $stations = $branchWithStations->station; // Retrieve stations from the loaded relationship
-        return response()->json(['status' => 'success', 'data' => $stations]);
+        return response()->json(['status' => 'success', 'data' => [$stations]]);
     }
     public function update($id, Request $request)
     {
         $station = Station::findOrFail($id);
-        $data = $request->validate([
-            'facilities' => 'text',
-            'operating_hours' => 'text'
-        ]);
-        $station->update($data);
-        return response()->json(['status' => 'success', 'message' => 'Station updated successfully']);
+        $station->operating_hours = $request->operating_hours;
+        $station->service_status = $request->service_status;
+        $station->facilities = $request->facilities;
+        $station->save();
+        return response()->json(['status' => 'success', 'message' => 'Station updated successfully'], 200);
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminBranchController;
 use App\Http\Controllers\Admin\AdminCoinRequestController;
+use App\Http\Controllers\Admin\AdminOverViewController;
 use App\Http\Controllers\Branch\BranchMessageController;
 use App\Http\Controllers\Branch\BranchReviewController;
 use App\Http\Controllers\Branch\BranchRideController;
@@ -30,17 +31,18 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('messages', [BranchMessageController::class, 'store']);
         Route::delete('messages/{id}', [BranchMessageController::class, 'destroy']);
         Route::get('reviews', [BranchReviewController::class, 'index']);
-        Route::post('reviews', [BranchReviewController::class, 'store']);
-        Route::delete('reviews/{id}', [BranchReviewController::class, 'index']);
+        Route::delete('reviews/{id}', [BranchReviewController::class, 'destroy']);
         Route::get('stations', [BranchStationController::class, 'index']);
         Route::put('stations/{id}', [BranchStationController::class, 'update']);
         Route::get('rides', [BranchRideController::class, 'index']);
-        Route::put('rides/{id}', [BranchRideController::class, 'index']);
+        Route::put('rides/{id}', [BranchRideController::class, 'update']);
+        Route::post('logout', [UserController::class, 'logout']);
     });
 });
 Route::middleware('jwt.auth')->group(function () {
     Route::middleware('role:Passenger')->group(function () {
         Route::post('logout', [UserController::class, 'logout']);
+        Route::post('reviews', [BranchReviewController::class, 'store']);
         Route::post('reviews', [BranchReviewController::class, 'store']);
         Route::get('refresh', [UserController::class, 'refresh']);
         Route::get('passengermessages', [PassengerMessageController::class, 'index']);
@@ -49,15 +51,22 @@ Route::middleware('jwt.auth')->group(function () {
 });
 Route::middleware('jwt.auth')->group(function () {
     Route::middleware('role:Admin')->group(function () {
+        Route::get('overview', [AdminOverViewController::class, 'index']);
+        Route::post('logout', [UserController::class, 'logout']);
         Route::get('coinrequests', [AdminCoinRequestController::class, 'index']);
+        Route::put('coinrequests/{id}', [AdminCoinRequestController::class, 'update']);
+        Route::delete('coinrequests/{id}', [AdminCoinRequestController::class, 'destroy']);
+        Route::get('branches', [AdminBranchController::class, 'index']);
+        Route::put('branches/{id}', [AdminBranchController::class, 'update']);
+        Route::delete('branches/{id}', [AdminBranchController::class, 'destroy']);
         Route::post('email', [AdminBranchController::class, 'store']);
-        Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
     });
 });
 
 Route::middleware('guest')->group(function () {
-    Route::post('login', [UserController::class, "login"])->name('login');
+    Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
     Route::post('register', [UserController::class, "register"])->name('register');
+    Route::post('login', [UserController::class, "login"])->name('login');
     Route::get('view_stations', [UserStationController::class, "view_stations"]);
     Route::get('view_nearest_stations', [UserStationController::class, "view_nearest_stations"]);
     Route::get('view_highest_rating_stations', [UserStationController::class, "view_highest_rating_stations"]);

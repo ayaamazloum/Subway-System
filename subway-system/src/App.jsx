@@ -43,7 +43,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={userType === 3 || userType == null ? <Home /> : <Authentication logout={true} />} />
         <Route path="/auth" element={userType== null && <Authentication />}></Route>
-        <Route path="/branchAuth" element={userType == null ? <BranchAuthentication /> : <Authentication logout={true}/>}></Route>
+        <Route path="/branchAuth" element={userType === null ? <BranchAuthentication /> : <Authentication logout={true}/>}></Route>
         <Route path="/stations" element={userType === 3 || userType == null ? <Stations /> : <Authentication logout={true}/>} />
         <Route path="/rides" element={userType === 3 || userType == null ? <UserRide /> : <Authentication logout={true}/>} />
         <Route path="/userstations" element={userType === 3 || userType == null ? <UserStation /> : <Authentication logout={true} />} />

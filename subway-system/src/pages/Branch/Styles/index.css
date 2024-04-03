@@ -9,12 +9,6 @@
   --black-color: #282828;
   --white-color: #fff;
 }
-* {
-  box-sizing: border-box;
-}
-*:focus {
-  outline: none;
-}
 body {
   margin: 0;
   color: var(--black-color);
@@ -88,6 +82,7 @@ a {
 }
 .stations-page .station {
   overflow: hidden;
+  background-color: var(--white-color) !important;
 }
 .stations-page .station .actions button {
   width: 85px;
@@ -146,6 +141,7 @@ a {
   width: 85px;
   font-size: 15px;
   padding: 2px 10px;
+  text-transform: capitalize;
   border-radius: 5px;
   color: var(--white-color);
   border: none;
@@ -233,6 +229,8 @@ a {
 }
 .messages-page .message {
   overflow: hidden;
+  height: 200px;
+  background-color: var(--white-color) !important;
 }
 .messages-page .message .actions button {
   width: 85px;
@@ -278,4 +276,18 @@ a {
 .messages-page .message .reply svg:hover {
   cursor: pointer;
   color: var(--green-color);
+}
+.active {
+  background-color: var(--green-color) !important;
+}
+.closed {
+  background-color: var(--red-color) !important;
+}
+.delayed {
+  background-color: var(--orange-color) !important;
+}
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }
