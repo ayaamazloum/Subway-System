@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Station extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['latitude', 'longitude'];
+
+    
     public function branch()
     {
         return $this->belongsTo(Branch::class);
