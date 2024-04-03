@@ -9,6 +9,7 @@ use App\Http\Controllers\Branch\BranchStationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserStationController;
 use App\Http\Controllers\UserRideController;
+use App\Http\Controllers\UserTicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -61,4 +62,5 @@ Route::middleware('guest')->group(function () {
     Route::get('view_highest_rating_stations', [UserStationController::class, "view_highest_rating_stations"]);
     Route::get('view_station_rides/{station_id}', [UserRideController::class, "view_station_rides"]);
     Route::get('view_passenger_rides/{passenger_id}', [UserRideController::class, "view_passenger_rides"]);
+    Route::post('book_ticket', [UserTicketController::class, "book_ticket"]);
 });
