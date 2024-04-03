@@ -15,8 +15,8 @@ const StationCard = ( {station} ) => {
     const handleConvert = async () => {
         try {
             const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${station.latitude}&lon=${station.longitude}&format=json`);
-            if (response.data.display_name) {
-                setLocationName(response.data.display_name);
+            if (response.data && response.data.address && response.data.address.village) {
+                setLocationName(response.data.address.village);
             } else {
                 setLocationName('Location not found');
             }
