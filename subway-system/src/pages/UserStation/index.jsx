@@ -28,6 +28,17 @@ const UserStation = () => {
         }
     };
 
+    const fetchHighestRatingStations = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/view_highest_rating_stations");
+            const data = await response.json();
+            setHighestRatingStations(data.data);
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <div className="page light-bg flex column">
             <div className="input-container white-bg">
