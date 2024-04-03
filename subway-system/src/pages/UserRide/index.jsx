@@ -6,10 +6,8 @@ import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import sendRequest from '../../core/tools/remote/request';
 import { requestMehods } from "../../core/enums/requestMethods";
 import { toast } from 'react-toastify';
-import { useState } from "react";
 import NavBar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import UserRideCard from "./components/UserRideCard";
 import { useLocation } from "react-router-dom";
 
 import "./style.css";
