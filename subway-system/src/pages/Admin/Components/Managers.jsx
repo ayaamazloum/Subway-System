@@ -62,12 +62,12 @@ const Managers = () => {
       `branches/${selectedBranch.id}`,
       updateBranch
     )
-    .then((response) => {
-        setLoading(true);
+      .then((response) => {
         if (response.data.status === "success") {
           closePopup();
-          setLoading(false);
+          setLoading(true);
           toast.success(response.data.message);
+          getBranches();
         }
       })
       .finally(() => {
@@ -77,11 +77,11 @@ const Managers = () => {
   const handleAddSubmit = () => {
     const response = sendRequest(requestMehods.POST, "email", sentEmail)
       .then((response) => {
-        setLoading(true);
         if (response.data.status === "success") {
-          toast.success(response.data.message);
+          setLoading(true);
           closeAddPopup();
-          setLoading(false);
+          toast.success(response.data.message);
+          getBranches();
         }
       })
       .catch((e) => {
