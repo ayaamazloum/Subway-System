@@ -36,7 +36,6 @@ function BranchesMap() {
 
   useEffect(() => {
     loadStaions();
-    console.log(stations);
   }, []);
 
   return (

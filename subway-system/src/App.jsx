@@ -26,49 +26,43 @@ import BranchAuthentication from "./pages/Authentication/BranchAuthentication.js
 import Cookies from "universal-cookie";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, useState } from "react";
 
 const App = () => {
   const cookie = new Cookies();
-  const [userType, setUserType] = useState();
   const location = useLocation();
-
-  useEffect(() => {
-    setUserType(cookie.get('user_type'));
-   }, []);
 
   return (
     <div className="app lexend-text white-bg">
       <ToastContainer />
       <Routes>
-        <Route path="/" element={userType === 3 || userType == null ? <Home /> : <Authentication logout={true} />} />
-        <Route path="/auth" element={userType== null && <Authentication />}></Route>
-        <Route path="/branchAuth" element={userType === null ? <BranchAuthentication /> : <Authentication logout={true}/>}></Route>
-        <Route path="/stations" element={userType === 3 || userType == null ? <Stations /> : <Authentication logout={true}/>} />
-        <Route path="/rides" element={userType === 3 || userType == null ? <UserRide /> : <Authentication logout={true}/>} />
-        <Route path="/userstations" element={userType === 3 || userType == null ? <UserStation /> : <Authentication logout={true} />} />
-        <Route path="/userride" element={userType === 3 || userType == null ? <UserRide /> : <Authentication logout={true} />} />
-        <Route path="/userprofile" element={userType === 3 ? <UserProfile />  : <Authentication logout={true} />} />
+        <Route path="/" element={cookie.get('user_type') == 3 || cookie.get('user_type') == null ? <Home /> : <Authentication logout={true} />} />
+        <Route path="/auth" element={cookie.get('user_type')== null ? <Authentication logout={false} /> : <Authentication logout={true} />}></Route>
+        <Route path="/branchAuth" element={cookie.get('user_type') == null ? <BranchAuthentication /> : <Authentication logout={true}/>}></Route>
+        <Route path="/stations" element={cookie.get('user_type') == 3 || cookie.get('user_type') == null ? <Stations /> : <Authentication logout={true}/>} />
+        <Route path="/rides" element={cookie.get('user_type') == 3 || cookie.get('user_type') == null ? <UserRide /> : <Authentication logout={true}/>} />
+        <Route path="/userstations" element={cookie.get('user_type') == 3 || cookie.get('user_type') == null ? <UserStation /> : <Authentication logout={true} />} />
+        <Route path="/userride" element={cookie.get('user_type') == 3 || cookie.get('user_type') == null ? <UserRide /> : <Authentication logout={true} />} />
+        <Route path="/userprofile" element={cookie.get('user_type') == 3 ? <UserProfile />  : <Authentication logout={true} />} />
       </Routes>
 
       {BranchRoutes.includes(location.pathname) && (
-        <div className="d-flex page">
+        <div className="d-flex page branch-page">
           <SideBar />
           <Routes>
-            <Route path="/branch/stations" element={cookie.get('user_type') === 2 ? <Main /> : <Authentication logout={true} />} />
-            <Route path="/branch/rides" element={cookie.get('user_type') === 2 ? <Rides /> : <Authentication logout={true} />} />
-            <Route path="/branch/reviews" element={cookie.get('user_type') === 2 ? <Reviews /> : <Authentication logout={true} />} />
-            <Route path="/branch/messages" element={cookie.get('user_type') === 2 ? <Messages /> : <Authentication logout={true} />} />
+            <Route path="/branch/stations" element={cookie.get('user_type') == 2 ? <Main /> : <Authentication logout={true} />} />
+            <Route path="/branch/rides" element={cookie.get('user_type') == 2 ? <Rides /> : <Authentication logout={true} />} />
+            <Route path="/branch/reviews" element={cookie.get('user_type') == 2 ? <Reviews /> : <Authentication logout={true} />} />
+            <Route path="/branch/messages" element={cookie.get('user_type') == 2 ? <Messages /> : <Authentication logout={true} />} />
           </Routes>
         </div>
       )}
       {AdminRoutes.includes(location.pathname) && (
-        <div className="d-flex page">
+        <div className="d-flex page admin-page">
           <AdminSideBar />
           <Routes>
-            <Route path="/admin/overview" element={cookie.get('user_type') === 1 ? <Admin /> : <Authentication logout={true} />} />
-            <Route path="/admin/branches" element={cookie.get('user_type') === 1 ? <AdminManagers /> : <Authentication logout={true} />} />
-            <Route path="/admin/coinrequests" element={cookie.get('user_type') === 1 ? <CoinRequests /> : <Authentication logout={true} />} />
+            <Route path="/admin/overview" element={cookie.get('user_type') == 1 ? <Admin /> : <Authentication logout={true} />} />
+            <Route path="/admin/branches" element={cookie.get('user_type') == 1 ? <AdminManagers /> : <Authentication logout={true} />} />
+            <Route path="/admin/coinrequests" element={cookie.get('user_type') == 1 ? <CoinRequests /> : <Authentication logout={true} />} />
           </Routes>
         </div>
       )}

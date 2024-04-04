@@ -3,6 +3,7 @@ import { requestMehods } from "../../../core/enums/requestMethods";
 import { useEffect, useState } from 'react';
 import Cookies from "universal-cookie"
 import { useNavigate } from 'react-router';
+import { toast } from "react-toastify";
 
 const SigninForm = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -29,6 +30,7 @@ const SigninForm = () => {
       
       const cookie = new Cookies();
       if (res.data.status === "success") {
+        toast.success("Logged in successfully. You're welcome.");
         cookie.set('token', res.data.authorization.token);
         cookie.set('user_type', res.data.user.role_id);
         const userType = res.data.user.role_id;

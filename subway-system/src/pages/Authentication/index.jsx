@@ -14,17 +14,15 @@ import { toast } from 'react-toastify';
 const Authentication = ({logout}) => {
     const [isSignin, setIsSignin] = useState(true);
     const navigate = useNavigate();
-    
+
+    const cookie = new Cookies();
     const handleLogout = async () => {
         try {
-            navigate('/auth');
-            const response = await sendRequest(requestMehods.POST, "/logout");
+            const response = await sendRequest(requestMehods.POST, "/passengerlogout");
             if (response.data.status === 'success') {
-                const cookie = new Cookies();
-                console.log(cookie.get('user_type'));
                 cookie.remove('token');
                 cookie.remove('user_type');
-                toast.error('Unauthorized access!');
+                navigate('/auth');
             }
         } catch (error) {
             console.error('Error logging out:', error);
@@ -36,7 +34,11 @@ const Authentication = ({logout}) => {
     }
 
     useEffect(() => {
-        if (logout) { handleLogout(); }
+        if (logout) {
+            if(cookie.get('token'))
+                handleLogout();
+        }
+        navigate('/auth');
     }, []);
         
     return <div className='auth-page flex full-width full-height'>

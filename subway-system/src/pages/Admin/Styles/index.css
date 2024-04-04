@@ -227,7 +227,7 @@ a {
   color: var(--white-color);
   font-size: 14px;
 }
-.active {
+.admin-page .active, .branch-page .active{
   cursor: default !important;
   background-color: var(--green-color) !important;
 }

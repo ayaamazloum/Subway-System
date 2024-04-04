@@ -277,7 +277,8 @@ a {
   cursor: pointer;
   color: var(--green-color);
 }
-.active {
+.admin-page .active,
+.branch-page .active {
   background-color: var(--green-color) !important;
 }
 .closed {

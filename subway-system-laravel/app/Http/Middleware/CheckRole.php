@@ -18,7 +18,7 @@ class CheckRole
 
         
         if ($request->user() && $request->user()->role_id != $role->id) {
-            return response()->json(['error' => 'Unauthorized'], 403);
+            return response()->json(['error' => $role->id], 403);
         }
 
         return $next($request);

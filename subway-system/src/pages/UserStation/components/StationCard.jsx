@@ -23,7 +23,6 @@ const StationCard = ( {station} ) => {
             } else {
                 setLocationName('Location not found');
             }
-            console.log(locationName);
         } catch (error) {
             console.error('Error fetching location:', error);
             setLocationName('Error fetching location');

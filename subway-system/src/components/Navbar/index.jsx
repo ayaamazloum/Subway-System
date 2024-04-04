@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import sendRequest from '../../core/tools/remote/request';
 import { requestMehods } from "../../core/enums/requestMethods";
 import Cookies from "universal-cookie";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
     const [collapsedNavlinks, setCollapsedNavlinks] = useState(false);
@@ -23,7 +24,7 @@ const NavBar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await sendRequest(requestMehods.POST, "/logout");
+            const response = await sendRequest(requestMehods.POST, "/passengerlogout");
             if (response.data.status === 'success') {
                 const cookie = new Cookies();
                 cookie.remove('token');
@@ -36,7 +37,12 @@ const NavBar = () => {
     }
 
     const handleAuth = (logout) => {
-        logout ? handleLogout() : navigate('/auth');
+        if (logout) {
+            toast.success('Logged out successfully')
+            handleLogout();
+        } else {
+            navigate('/auth');
+        }
     }
     
     useEffect(() => {

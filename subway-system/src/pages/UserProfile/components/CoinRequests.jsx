@@ -60,7 +60,7 @@ const CoinRequests = () => {
                     <button onClick={requestCoins}>Request Coins</button>
                 </div>
                 {requests?.map((request, i) => {
-                    return <div className="request-card flex wrap space-between white-bg semi-rounded">
+                    return <div key={i} className="request-card flex wrap space-between white-bg semi-rounded">
                                 <p className="small-card-padding">{request.amount}$</p>
                                 <p className="small-card-padding light-text">{formatDate(request.date)}</p>
                                 <p className={`small-card-padding ${request.coin_request_status == "Pending"
