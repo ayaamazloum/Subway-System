@@ -67,7 +67,7 @@ const UserRideCard = ( {ride} ) => {
             </div>
             <div className="flex gap-10">
                 <FontAwesomeIcon icon={faClock} className="primary-text"/>
-                <p>{start_time} - {end_time}</p>
+                <p>{start_time.slice(0, 5)} - {end_time.slice(0, 5)}</p>
             </div>
             <div className="flex gap-10">
                 <FontAwesomeIcon icon={faPeopleArrows} className="primary-text" />

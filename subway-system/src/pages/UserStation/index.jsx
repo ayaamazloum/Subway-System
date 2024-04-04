@@ -15,6 +15,7 @@ const UserStation = () => {
   const [nearestStations, setNearestStations] = useState([]);
   const [highestRatingStations, setHighestRatingStations] = useState([]);
   const [allStations, setAllStations] = useState([]);
+  const [loading, setLoading] = useState();
 
   const cookie = new Cookies();
 
@@ -48,6 +49,7 @@ const UserStation = () => {
         }
       }
     }
+    setLoading(false);
   }
 
   const fetchHighestRatingStations = async () => {
@@ -60,6 +62,7 @@ const UserStation = () => {
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
   const fetchAllStations = async () => {
@@ -70,9 +73,11 @@ const UserStation = () => {
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
+    setLoading(true);
     if(!cookie.get('token')){
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -91,36 +96,45 @@ const UserStation = () => {
 
   return (
     <div className="page stations-page light-bg flex column gap-20">
-      <NavBar />
-      <div className="input-container white-bg semi-rounded">
-        <FontAwesomeIcon icon={faSearch} className="search-icon" />
-        <input type="text" placeholder="Beirut" className="search-input" />
-      </div>
-      <div className="padding">
-        <h2 className="padding-bottom">Nearest Stations</h2>
-        <div className="flex center gap wrap">
-          {nearestStations?.map((station) => (
-            <StationCard key={station.id} station={station} />
-          ))}
+      {loading ? (
+        <BeatLoader
+          className="loader"
+          color={"#35b368"}
+          loading={loading}
+          size={50}
+        />
+      ) : (<>
+        <NavBar />
+        <div className="input-container white-bg semi-rounded">
+          <FontAwesomeIcon icon={faSearch} className="search-icon" />
+          <input type="text" placeholder="Beirut" className="search-input" />
         </div>
-      </div>
-      <div className="padding">
-        <h2 className="padding-bottom">Highest Rating Stations</h2>
-        <div className="flex center wrap gap">
-          {highestRatingStations?.map((station) => (
-            <StationCard key={station.id} station={station} />
-          ))}
+        <div className="padding">
+          <h2 className="padding-bottom">Nearest Stations</h2>
+          <div className="flex center gap wrap">
+            {nearestStations?.map((station) => (
+              <StationCard key={station.id} station={station} />
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="padding">
-        <h2 className="padding-bottom">All Stations</h2>
-        <div className="flex center wrap gap">
-          {allStations?.map((station) => (
-            <StationCard key={station.id} station={station} />
-          ))}
+        <div className="padding">
+          <h2 className="padding-bottom">Highest Rating Stations</h2>
+          <div className="flex center wrap gap">
+            {highestRatingStations?.map((station) => (
+              <StationCard key={station.id} station={station} />
+            ))}
+          </div>
         </div>
-      </div>
-      <Footer />
+        <div className="padding">
+          <h2 className="padding-bottom">All Stations</h2>
+          <div className="flex center wrap gap">
+            {allStations?.map((station) => (
+              <StationCard key={station.id} station={station} />
+            ))}
+          </div>
+        </div>
+        <Footer />
+      </>)}
     </div>
   );
 };

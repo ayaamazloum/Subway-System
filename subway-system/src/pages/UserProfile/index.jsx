@@ -8,11 +8,13 @@ import Message from "./components/Message";
 import NavBar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import CoinRequests from "./components/CoinRequests";
+import { BeatLoader } from "react-spinners";
 
 const UserProfile = () => {
   const [messages, setMessages] = useState();
   const [replies, setReplies] = useState();
   const [name, setName] = useState();
+  const [loading, setLoading] = useState();
   const [passengerRides, setPassengerRides] = useState([]);
 
   const messagesHistory = async () => {
@@ -27,6 +29,7 @@ const UserProfile = () => {
         setReplies(res.data.branch_replies);
         setName(res.data.name);
       }
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -37,15 +40,25 @@ const UserProfile = () => {
       "view_passenger_rides"
     ).then((response) => {
       setPassengerRides(response.data.data);
+      setLoading(false);
     });
   };
   useEffect(() => {
+    setLoading(true);
     messagesHistory();
     getPassengerRides();
   }, []);
 
   return (
     <div className="page light-bg flex column">
+      {loading ? (
+        <BeatLoader
+          className="loader"
+          color={"#35b368"}
+          loading={loading}
+          size={50}
+        />
+      ) : (<>
       <NavBar />
       <p className="user-name lg-text bold">{name}</p>
       <CoinRequests />
@@ -82,7 +95,8 @@ const UserProfile = () => {
           })}
         </div>
       </div>
-      <Footer />
+      <Footer /></>
+      )}
     </div>
   );
 };
