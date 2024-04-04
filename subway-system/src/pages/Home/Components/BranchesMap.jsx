@@ -20,6 +20,7 @@ function BranchesMap() {
     try {
       const res = await sendRequest(requestMehods.GET, "/view_stations", {});
       
+      console.log(res);
       if (res.data.message === "success") {
         setAllStaions(res.data.data);
         setStations(res.data.data);

@@ -42,26 +42,45 @@ class UserStationController extends Controller
 
     }
 
-    public function view_nearest_stations(Request $request)
+    public function passenger_nearest_stations()
     {
-        $passenger = Passenger::find($request->input('passenger_id'));
+        $user_id = auth()->id();
+        $passenger = Passenger::where('user_id', $user_id)->first();
 
         if (!$passenger) {
             return response()->json([
-                "message" => "passenger not found"
+                "message" => "Passenger not found"
             ], 404);
         }
-        $passengerLatitude = $passenger->latitude;
-        $passengerLongitude = $passenger->longitude;
-        $maxDistance = 0.5;
+        
+        $latitude = $passenger->latitude;
+        $longitude = $passenger->longitude;
 
-        $stations = Station::whereBetween('latitude', [$passengerLatitude - $maxDistance, $passengerLatitude + $maxDistance])
-        ->whereBetween('longitude', [$passengerLongitude - $maxDistance, $passengerLongitude + $maxDistance])
+        $maxDistance = 0.5;
+        $stations = Station::whereBetween('latitude', [$latitude - $maxDistance, $latitude + $maxDistance])
+        ->whereBetween('longitude', [$longitude - $maxDistance, $longitude + $maxDistance])
         ->get();
 
         return response()->json([
             "message" => "success",
-            "data" => $stations
+            "stations" => $stations
+        ], 200);
+    }
+
+    public function view_nearest_stations(Request $request)
+    {
+        
+        $latitude = $request->latitude;
+        $longitude = $request->longitude;
+
+        $maxDistance = 0.5;
+        $stations = Station::whereBetween('latitude', [$latitude - $maxDistance, $latitude + $maxDistance])
+        ->whereBetween('longitude', [$longitude - $maxDistance, $longitude + $maxDistance])
+        ->get();
+
+        return response()->json([
+            "message" => "success",
+            "stations" => $stations
         ], 200);
     }
 

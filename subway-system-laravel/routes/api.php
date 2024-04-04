@@ -53,7 +53,6 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('passengermessages', [PassengerMessageController::class, 'store']);
         Route::get('view_passenger_rides', [UserRideController::class, "view_passenger_rides"]);
         Route::post('view_passenger_rides', [UserRideController::class, "store"]);
-        Route::get('view_passenger_rides/{passenger_id}', [UserRideController::class, "view_passenger_rides"]);
         Route::post('book_ticket', [UserTicketController::class, "book_ticket"]);
     });
 });
@@ -68,6 +67,7 @@ Route::middleware('jwt.auth')->group(function () {
         Route::put('branches/{id}', [AdminBranchController::class, 'update']);
         Route::delete('branches/{id}', [AdminBranchController::class, 'destroy']);
         Route::post('email', [AdminBranchController::class, 'store']);
+        Route::get('passenger_nearest_stations', [UserStationController::class, "passenger_nearest_stations"]);
     });
 });
 
@@ -75,8 +75,9 @@ Route::middleware('guest')->group(function () {
     Route::post('registerbranch', [AdminBranchController::class, 'create_branch']);
     Route::post('register', [UserController::class, "register"])->name('register');
     Route::post('login', [UserController::class, "login"])->name('login');
-    Route::get('view_stations', [UserStationController::class, "view_stations"]);
-    Route::get('view_nearest_stations', [UserStationController::class, "view_nearest_stations"]);
+    Route::post('view_nearest_stations', [UserStationController::class, "view_nearest_stations"]);
     Route::get('view_highest_rating_stations', [UserStationController::class, "view_highest_rating_stations"]);
     Route::get('view_station_rides/{station_id}', [UserRideController::class, "view_station_rides"]);
 });
+
+Route::get('view_stations', [UserStationController::class, "view_stations"]);

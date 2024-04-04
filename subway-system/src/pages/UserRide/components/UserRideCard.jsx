@@ -56,20 +56,20 @@ const UserRideCard = ( {ride} ) => {
     };
 
     return (
-        <div className="ride-card white-bg semi-rounded flex column gap">
+        <div className="ride-card white-bg semi-rounded flex column gap-20">
             <div className="flex flex-end">
                 <FontAwesomeIcon icon={faStar} className="primary-text"/>
                 <p>{rating}</p>
             </div>
-            <div className="flex small-gap">
+            <div className="flex gap-10">
                 <FontAwesomeIcon icon={faLocationDot} className="primary-text"/>
                 <p>{startLocationName} - {endLocationName}</p>
             </div>
-            <div className="flex small-gap">
+            <div className="flex gap-10">
                 <FontAwesomeIcon icon={faClock} className="primary-text"/>
                 <p>{start_time} - {end_time}</p>
             </div>
-            <div className="flex small-gap">
+            <div className="flex gap-10">
                 <FontAwesomeIcon icon={faPeopleArrows} className="primary-text" />
                 <p>{capacity} Seats</p>
             </div>

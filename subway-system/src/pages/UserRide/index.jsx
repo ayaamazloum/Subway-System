@@ -57,7 +57,7 @@ const UserRide = () => {
   return (
     <div className="page light-bg flex column">
       <NavBar />
-      <div className="flex space-between">
+      <div className="flex space-between padding">
         <div>
           <h1>{stationName}</h1>
         </div>
@@ -69,8 +69,8 @@ const UserRide = () => {
           <h1>{locationName}</h1>
         </div>
       </div>
-      <div className="flex center">
-        <div className="input-container white-bg semi-rounded flex">
+      <div className="flex center gap-20">
+        <div className="message-input-container white-bg semi-rounded flex center">
           <FontAwesomeIcon
             icon={faMessage}
             className="primary-text margin-left"
@@ -88,7 +88,7 @@ const UserRide = () => {
       </div>
       <div className="padding">
         <h3 className="padding-bottom">List of Rides</h3>
-        <div className="flex space-between padding">
+        <div className="flex center wrap padding">
           {rides.map((ride, index) => (
             <UserRideCard key={index} ride={ride} />
           ))}
