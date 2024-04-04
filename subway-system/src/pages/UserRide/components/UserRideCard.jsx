@@ -4,9 +4,11 @@ import { faLocationDot, faStar, faClock, faPeopleArrows } from "@fortawesome/fre
 import axios from "axios";
 
 const UserRideCard = ( {ride} ) => {
-    const {rating, start_station_longitude, start_station_latitude, end_station_longitude, end_station_latitude, start_time, end_time, capacity } = ride;
+    const {ride_id, rating, start_station_longitude, start_station_latitude, end_station_longitude, end_station_latitude, start_time, end_time, capacity } = ride;
     const [startLocationName, setStartLocationName] = useState('');
     const [endLocationName, setEndLocationName] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [ticketType, setTicketType] = useState('')
 
     useEffect(() => {
         const fetchLocationName = async (latitude, longitude, setLocationName) => {
@@ -27,6 +29,32 @@ const UserRideCard = ( {ride} ) => {
         fetchLocationName(end_station_latitude, end_station_longitude, setEndLocationName);
     }, [start_station_latitude, start_station_longitude, end_station_latitude, end_station_longitude]);
 
+    const togglePopup = () => {
+        setShowPopup(!showPopup);
+    };
+
+    const handleTicketTypeChange = (event) => {
+        setTicketType(event.target.value);
+    };
+
+    const handleBookTicket = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('passenger_id', 1);
+            formData.append('type', ticketType);
+            formData.append('ride_id', ride_id);
+            console.log(formData);
+
+            const response = await axios.post('http://127.0.0.1:8000/api/book_ticket', 
+            formData   
+            );
+            console.log(response.data);
+            togglePopup();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <div className="ride-card white-bg semi-rounded flex column gap">
             <div className="flex flex-end">
@@ -46,8 +74,24 @@ const UserRideCard = ( {ride} ) => {
                 <p>{capacity} Seats</p>
             </div>
             <div className="flex center button-div">
-                <button>Book Ticket</button>
+                <button onClick={togglePopup}>Book Ticket</button>
             </div>
+            {showPopup && (
+                <div className="popup">
+                    <div className="popup-content flex column">
+                        <h2>Book Ticket</h2>
+                        <select value={ticketType} onChange={handleTicketTypeChange}>
+                            <option value="">Select Ticket Type</option>
+                            <option value="one_way">One Way</option>
+                            <option value="pass">Pass</option>
+                        </select>
+                        <button onClick={handleBookTicket}>Book Ticket</button>
+                        <button onClick={togglePopup}>Close</button>
+                    </div>
+
+
+                </div>
+            )}
 
         </div>
     )
