@@ -10,24 +10,26 @@ const UserRideCard = ( {ride} ) => {
     const [showPopup, setShowPopup] = useState(false);
     const [ticketType, setTicketType] = useState('')
 
-    useEffect(() => {
-        const fetchLocationName = async (latitude, longitude, setLocationName) => {
-            try {
-                const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
-                if (response.data && response.data.address && response.data.address.village) {
-                    setLocationName(response.data.address.village);
-                } else {
-                    setLocationName('Location not found');
-                }
-            } catch (error) {
-                console.error(error.message);
-                setLocationName('Error fetching location');
-            }
-        };
+    console.log(ride.end_station_latitude);
 
-        fetchLocationName(start_station_latitude, start_station_longitude, setStartLocationName);
-        fetchLocationName(end_station_latitude, end_station_longitude, setEndLocationName);
-    }, [start_station_latitude, start_station_longitude, end_station_latitude, end_station_longitude]);
+    const fetchLocationName = async (latitude, longitude, loc) => {
+        try {
+            const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+            console.log(response.data.address.city);
+            if (response.status === 200) {
+                loc == 'start' ? setStartLocationName(response.data.address.city) : setEndLocationName(response.data.address.city);
+            } else {
+                return 'Location not found';
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchLocationName(start_station_latitude, start_station_longitude, 'start');
+        fetchLocationName(end_station_latitude, end_station_longitude, 'end');
+    }, []);
 
     const togglePopup = () => {
         setShowPopup(!showPopup);
@@ -40,7 +42,6 @@ const UserRideCard = ( {ride} ) => {
     const handleBookTicket = async () => {
         try {
             const formData = new FormData();
-            formData.append('passenger_id', 1);
             formData.append('type', ticketType);
             formData.append('ride_id', ride_id);
             console.log(formData);

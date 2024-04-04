@@ -18,14 +18,13 @@ const StationCard = ( {station} ) => {
     const handleConvert = async () => {
         try {
             const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
-            if (response.data && response.data.address && response.data.address.village) {
-                setLocationName(response.data.address.village);
+            if (response.status === 200) {
+                setLocationName(response.data.address.city);
             } else {
                 setLocationName('Location not found');
             }
         } catch (error) {
             console.error('Error fetching location:', error);
-            setLocationName('Error fetching location');
         }
     }
     return (

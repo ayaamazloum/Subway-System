@@ -44,6 +44,8 @@ class UserRideController extends Controller
                 'start_station_id' => $ride->endStation->id,
                 'end_station_id' => $ride->endStation->id,
                 'start_time' => $ride->start_time,
+                'end_station_latitude' => $ride->endStation->latitude,
+                'end_station_longitude' => $ride->endStation->longitude,
                 'end_time' => $ride->end_time,
                 'capacity' => $ride->capacity,
             ];

@@ -7,7 +7,6 @@ import StationCard from "./components/StationCard";
 import Footer from "../../components/Footer";
 import NavBar from "../../components/Navbar";
 import { BeatLoader } from "react-spinners";
-import Cookies from "universal-cookie";
 import sendRequest from "../../core/tools/remote/request";
 import { requestMehods } from "../../core/enums/requestMethods";
 
@@ -17,14 +16,13 @@ const UserStation = () => {
   const [allStations, setAllStations] = useState([]);
   const [loading, setLoading] = useState();
 
-  const cookie = new Cookies();
-
   const fetchNearestStations = async (latitude, longitude) => {
-    if (cookie.get('token')) {
+    if (longitude !== '' && latitude !== '') {
       try {
         const response = await sendRequest(
-          requestMehods.GET,
+          requestMehods.POST,
           "/view_nearest_stations",
+          { longitude: longitude, latitude: latitude }
         );
         if (response.data.message === "success") {
           setNearestStations(response.data.stations);
@@ -33,23 +31,6 @@ const UserStation = () => {
         console.error(error);
       }
     }
-    else {
-      if (longitude !== '' && latitude !== '') {
-        try {
-          const response = await sendRequest(
-            requestMehods.POST,
-            "/view_nearest_stations",
-            { longitude: longitude, latitude: latitude }
-          );
-          if (response.data.message === "success") {
-            setNearestStations(response.data.stations);
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    }
-    setLoading(false);
   }
 
   const fetchHighestRatingStations = async () => {
@@ -62,7 +43,6 @@ const UserStation = () => {
     } catch (error) {
       console.error(error);
     }
-    setLoading(false);
   };
 
   const fetchAllStations = async () => {
@@ -73,23 +53,20 @@ const UserStation = () => {
     } catch (error) {
       console.error(error);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     setLoading(true);
-    if(!cookie.get('token')){
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          fetchNearestStations(position.coords.latitude, position.coords.longitude);
-        }, (error) => {
-          console.error('Error getting location:', error);
-        });
-      } else {
-        console.error('Geolocation is not supported by this browser.');
-        return;
-      }
-    } else { fetchNearestStations('', '')}
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        fetchNearestStations(position.coords.latitude, position.coords.longitude);
+      }, (error) => {
+        console.error('Error getting location:', error);
+      });
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      return;
+    }
     fetchHighestRatingStations();
     fetchAllStations();
   }, []);
