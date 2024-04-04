@@ -12,3 +12,22 @@
 .flex-end {
     justify-content: flex-end;
 }
+
+.popup-content {
+    display: flex;
+
+    gap: 20px;
+}
+
+.popup select {
+    height: 30px;
+}
+
+.popup button {
+    border: none;
+    padding: 10px 20px;
+    background-color: #35B368;
+    color: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+}

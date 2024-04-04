@@ -17,6 +17,7 @@ class UserRideController extends Controller
 
         $transformedRides = $rides->map(function($ride) {
             return [
+                'ride_id' => $ride->id, 
                 'rating' => $ride->reviews->avg('rating'),
                 'start_station_longitude' => $ride->startStation->longitude,
                 'start_station_latitude' => $ride->startStation->latitude,
