@@ -61,6 +61,18 @@ const SideBar = () => {
           <a
             onClick={(e) => {
               e.preventDefault();
+              navigate("/admin/stations");
+            }}
+            className="d-flex align-center fs-18 c-black rad-6 p-10"
+          >
+            <FontAwesomeIcon icon={faUsers} />
+            <span className="hide-mobile">Stations</span>
+          </a>
+        </li>
+        <li>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
               navigate("/admin/coinrequests");
             }}
             className="d-flex align-center fs-18 c-black rad-6 p-10"

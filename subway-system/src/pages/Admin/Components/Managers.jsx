@@ -62,7 +62,7 @@ const Managers = () => {
       `branches/${selectedBranch.id}`,
       updateBranch
     )
-      .then((response) => {
+    .then((response) => {
         setLoading(true);
         if (response.data.status === "success") {
           closePopup();
