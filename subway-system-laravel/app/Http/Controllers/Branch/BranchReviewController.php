@@ -17,14 +17,12 @@ class BranchReviewController extends Controller
         $branch = Branch::where('user_id', $user_id)->first();
         $branchId = $branch->id;
 
-        $reviews = DB::table('reviews')
-            ->join('passengers', 'reviews.passenger_id', '=', 'passengers.id')
-            ->join('users', 'passengers.user_id', '=', 'users.id')
-            ->join('rides', 'reviews.ride_id', '=', 'rides.id')
-            ->join('stations', 'rides.start_station_id', '=', 'stations.id')
-            ->join('branches', 'stations.branch_id', '=', 'branches.id')
-            ->select('reviews.*', 'users.name as passenger_name')
-            ->where('branches.id', $branchId)
+        $reviews = Review::with(['passenger.user' => function ($query) {
+            $query->select('id', 'name', 'email');
+        }, 'ride.startStation.branch'])
+            ->whereHas('ride.startStation.branch', function ($query) use ($branchId) {
+                $query->where('id', $branchId);
+            })
             ->get();
         return response()->json(['status' => 'success', 'data' => $reviews]);
     }
