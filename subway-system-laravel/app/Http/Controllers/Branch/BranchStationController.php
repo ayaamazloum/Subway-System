@@ -18,8 +18,8 @@ class BranchStationController extends Controller
         }
 
         $branch_id = $branch->id;
-        $branchWithStations = Branch::with('station')->find($branch_id); // Use with() to eager load the stations
-        $stations = $branchWithStations->station; // Retrieve stations from the loaded relationship
+        $branchWithStations = Branch::with('station')->find($branch_id);
+        $stations = $branchWithStations->station; 
         return response()->json(['status' => 'success', 'data' => [$stations]]);
     }
     public function update($id, Request $request)
