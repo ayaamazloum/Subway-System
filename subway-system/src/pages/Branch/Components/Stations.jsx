@@ -38,6 +38,7 @@ const Stations = () => {
       `stations/${selectedStation.id}`,
       updateStation
     );
+    setLoading(true);
     if (response.data.status === "success") {
       closePopup();
       sendRequest("GET", "stations")
@@ -45,7 +46,7 @@ const Stations = () => {
           setStations(response.data.data);
         })
         .finally(() => {
-          setLoading(false); 
+          setLoading(false);
         });
       toast.success(response.data.message);
     }
@@ -54,19 +55,19 @@ const Stations = () => {
   useEffect(() => {
     sendRequest("GET", "stations").then((response) => {
       setStations(response.data.data);
-      setLoading(false); 
+      setLoading(false);
     });
   }, []);
 
   return (
     <>
       <h1 className="p-relative fs-30">Stations</h1>
-      {loading ? ( 
+      {loading ? (
         <BeatLoader
           className="loader"
           color={"#35b368"}
           loading={loading}
-          size={50} 
+          size={50}
         />
       ) : (
         <div className="stations-page p-relative d-grid gap-20 m-20">

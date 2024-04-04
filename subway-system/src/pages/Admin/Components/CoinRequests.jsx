@@ -59,9 +59,10 @@ const CoinRequests = () => {
       requestMehods.DELETE,
       `coinrequests/${id}`
     ).then((response) => {
+      setLoading(true);
       if (response.data.status === "success") {
         toast.success(response.data.message);
-        setLoading(true);
+        setLoading(false);
         getCoinData();
       }
     });
@@ -72,6 +73,7 @@ const CoinRequests = () => {
       `coinrequests/${selectedRequest.id}`,
       updateRequest
     ).then((response) => {
+      setLoading(true);
       if (response.data.status === "success") {
         closePopup();
         toast.success(response.data.message);

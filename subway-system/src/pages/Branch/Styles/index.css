@@ -277,6 +277,10 @@ a {
   cursor: pointer;
   color: var(--green-color);
 }
+.admin-page,
+.branch-page {
+  background-color: #f1f5f9 !important;
+}
 .admin-page .active,
 .branch-page .active {
   background-color: var(--green-color) !important;

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Passenger;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 
 class UserTicketController extends Controller
 {
-    public function book_ticket(Request $request) {
-        
+    public function book_ticket(Request $request)
+    {
+
         $request->validate([
             'type' => 'required|in:one_way,pass',
             'ride_id' => 'required|integer',
@@ -23,7 +25,7 @@ class UserTicketController extends Controller
         $ticket->type = $type;
         $ticket->ride_id = $rideId;
         $ticket->save();
-    
-        return response()->json(['message' => 'Ticket booked successfully'], 201);
+
+        return response()->json(['status' => 'success', 'message' => 'Ticket booked successfully'], 201);
     }
 }

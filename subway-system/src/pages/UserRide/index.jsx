@@ -22,7 +22,7 @@ const UserRide = () => {
   const locationName = searchParams.get("locationName");
   const stationId = searchParams.get("id");
   const [rides, setRides] = useState([]);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(true);
 
   const sendMessage = async () => {
     try {
@@ -48,10 +48,12 @@ const UserRide = () => {
       }
       const data = await response.json();
       setRides(data.data);
-      console.log(data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
+  };
+  const handleLoader = () => {
     setLoading(false);
   };
 
@@ -69,47 +71,53 @@ const UserRide = () => {
           loading={loading}
           size={50}
         />
-      ) : (<>
-        <NavBar />
-        <div className="flex space-between padding">
-          <div>
-            <h1>{stationName}</h1>
+      ) : (
+        <>
+          <NavBar />
+          <div className="flex space-between padding">
+            <div>
+              <h1>{stationName}</h1>
+            </div>
+            <div className="flex center">
+              <FontAwesomeIcon
+                icon={faLocationDot}
+                className="primary-text adj-size"
+              />
+              <h1>{locationName}</h1>
+            </div>
           </div>
-          <div className="flex center">
-            <FontAwesomeIcon
-              icon={faLocationDot}
-              className="primary-text adj-size"
-            />
-            <h1>{locationName}</h1>
+          <div className="flex center gap-20">
+            <div className="message-input-container white-bg semi-rounded flex center">
+              <FontAwesomeIcon
+                icon={faMessage}
+                className="primary-text margin-left"
+              />
+              <input
+                onChange={(e) => setMessage(e.target.value)}
+                type="text"
+                placeholder="Have anything to tell us?"
+                className="message-input"
+              />
+            </div>
+            <div className="button-div">
+              <button onClick={sendMessage}>Send</button>
+            </div>
           </div>
-        </div>
-        <div className="flex center gap-20">
-          <div className="message-input-container white-bg semi-rounded flex center">
-            <FontAwesomeIcon
-              icon={faMessage}
-              className="primary-text margin-left"
-            />
-            <input
-              onChange={(e) => setMessage(e.target.value)}
-              type="text"
-              placeholder="Have anything to tell us?"
-              className="message-input"
-            />
+          <div className="padding">
+            <h3 className="padding-bottom">List of Rides</h3>
+            <div className="flex center wrap padding gap-40">
+              {rides.map((ride, index) => (
+                <UserRideCard
+                  closeLoader={handleLoader}
+                  key={index}
+                  ride={ride}
+                />
+              ))}
+            </div>
           </div>
-          <div className="button-div">
-            <button onClick={sendMessage}>Send</button>
-          </div>
-        </div>
-        <div className="padding">
-          <h3 className="padding-bottom">List of Rides</h3>
-          <div className="flex center wrap padding">
-            {rides.map((ride, index) => (
-              <UserRideCard key={index} ride={ride} />
-            ))}
-          </div>
-        </div>
-        <Footer />
-      </>)}
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

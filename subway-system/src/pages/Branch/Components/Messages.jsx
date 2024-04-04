@@ -12,7 +12,6 @@ const Messages = () => {
   const getMessages = () => {
     const response = sendRequest(requestMehods.GET, "messages").then(
       (response) => {
-        console.log(response);
         setMessages(response.data.data);
         setLoading(false);
       }
@@ -24,6 +23,7 @@ const Messages = () => {
   const handleDeleteAction = (id) => {
     const response = sendRequest(requestMehods.DELETE, `messages/${id}`).then(
       (response) => {
+        setLoading(true);
         if (response.data.status === "success") {
           toast.success(response.data.message);
           setLoading(true);

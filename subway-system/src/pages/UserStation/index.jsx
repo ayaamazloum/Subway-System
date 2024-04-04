@@ -17,7 +17,7 @@ const UserStation = () => {
   const [loading, setLoading] = useState();
 
   const fetchNearestStations = async (latitude, longitude) => {
-    if (longitude !== '' && latitude !== '') {
+    if (longitude !== "" && latitude !== "") {
       try {
         const response = await sendRequest(
           requestMehods.POST,
@@ -27,11 +27,12 @@ const UserStation = () => {
         if (response.data.message === "success") {
           setNearestStations(response.data.stations);
         }
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
     }
-  }
+  };
 
   const fetchHighestRatingStations = async () => {
     try {
@@ -58,19 +59,27 @@ const UserStation = () => {
   useEffect(() => {
     setLoading(true);
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        fetchNearestStations(position.coords.latitude, position.coords.longitude);
-      }, (error) => {
-        console.error('Error getting location:', error);
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          fetchNearestStations(
+            position.coords.latitude,
+            position.coords.longitude
+          );
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+        }
+      );
     } else {
-      console.error('Geolocation is not supported by this browser.');
+      console.error("Geolocation is not supported by this browser.");
       return;
     }
     fetchHighestRatingStations();
     fetchAllStations();
   }, []);
-
+  const closeLoading = () => {
+    setLoading(false);
+  };
   return (
     <div className="page stations-page light-bg flex column gap-20">
       {loading ? (
@@ -80,38 +89,44 @@ const UserStation = () => {
           loading={loading}
           size={50}
         />
-      ) : (<>
-        <NavBar />
-        <div className="input-container white-bg semi-rounded">
-          <FontAwesomeIcon icon={faSearch} className="search-icon" />
-          <input type="text" placeholder="Beirut" className="search-input" />
-        </div>
-        <div className="padding">
-          <h2 className="padding-bottom">Nearest Stations</h2>
-          <div className="flex center gap wrap">
-            {nearestStations?.map((station) => (
-              <StationCard key={station.id} station={station} />
-            ))}
+      ) : (
+        <>
+          <NavBar />
+          <div className="input-container white-bg semi-rounded">
+            <FontAwesomeIcon icon={faSearch} className="search-icon" />
+            <input type="text" placeholder="Beirut" className="search-input" />
           </div>
-        </div>
-        <div className="padding">
-          <h2 className="padding-bottom">Highest Rating Stations</h2>
-          <div className="flex center wrap gap">
-            {highestRatingStations?.map((station) => (
-              <StationCard key={station.id} station={station} />
-            ))}
+          <div className="padding">
+            <h2 className="padding-bottom">Nearest Stations</h2>
+            <div className="flex center gap wrap">
+              {nearestStations?.map((station) => (
+                <StationCard
+                  key={station.id}
+                  datafetched={closeLoading}
+                  station={station}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="padding">
-          <h2 className="padding-bottom">All Stations</h2>
-          <div className="flex center wrap gap">
-            {allStations?.map((station) => (
-              <StationCard key={station.id} station={station} />
-            ))}
+          <div className="padding">
+            <h2 className="padding-bottom">Highest Rating Stations</h2>
+            <div className="flex center wrap gap">
+              {highestRatingStations?.map((station) => (
+                <StationCard key={station.id} station={station} />
+              ))}
+            </div>
           </div>
-        </div>
-        <Footer />
-      </>)}
+          <div className="padding">
+            <h2 className="padding-bottom">All Stations</h2>
+            <div className="flex center wrap gap">
+              {allStations?.map((station) => (
+                <StationCard key={station.id} station={station} />
+              ))}
+            </div>
+          </div>
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

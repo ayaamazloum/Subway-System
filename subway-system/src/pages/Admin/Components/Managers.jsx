@@ -47,9 +47,10 @@ const Managers = () => {
   const handleDeleteBranch = (id) => {
     const response = sendRequest(requestMehods.DELETE, `branches/${id}`).then(
       (response) => {
+        setLoading(true);
         if (response.data.status === "success") {
           toast.success(response.data.message);
-          setLoading(true);
+          setLoading(false);
           getBranches();
         }
       }
@@ -65,7 +66,7 @@ const Managers = () => {
         setLoading(true);
         if (response.data.status === "success") {
           closePopup();
-          setLoading(true);
+          setLoading(false);
           toast.success(response.data.message);
         }
       })
@@ -76,9 +77,11 @@ const Managers = () => {
   const handleAddSubmit = () => {
     const response = sendRequest(requestMehods.POST, "email", sentEmail)
       .then((response) => {
+        setLoading(true);
         if (response.data.status === "success") {
           toast.success(response.data.message);
           closeAddPopup();
+          setLoading(false);
         }
       })
       .catch((e) => {

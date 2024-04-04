@@ -10,6 +10,7 @@ const Reviews = () => {
   const [loading, setLoading] = useState(true);
   const deleteReview = async (id) => {
     const response = await sendRequest(requestMehods.DELETE, `reviews/${id}`);
+    setLoading(true);
     if (response.data.status === "success") {
       sendRequest(requestMehods.GET, "reviews").then((response) => {
         setReviews(response.data.data);

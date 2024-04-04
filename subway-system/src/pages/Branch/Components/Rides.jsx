@@ -37,6 +37,7 @@ const Rides = () => {
       `rides/${updateRide.id}`,
       updateRide
     );
+    setLoading(true);
     if (response.data.status === "success") {
       sendRequest("GET", "rides")
         .then((response) => {
