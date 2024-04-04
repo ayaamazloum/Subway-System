@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('stations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("branch_id")->references("id")->on("branches");
+            $table->foreignId("branch_id")->references("id")->on("branches")->cascadeOnDelete();
             $table->string("name");
             $table->text("facilities");
             $table->string("operating_hours");

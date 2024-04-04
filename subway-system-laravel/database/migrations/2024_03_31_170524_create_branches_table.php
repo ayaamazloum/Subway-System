@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->enum  ("status", ["active", "shutdown"])->default("active");
+            $table->enum("status", ["active", "shutdown", "free"])->default("free");
             $table->foreignId('user_id')->references("id")->on("users");
-                
-            
+
+
             $table->timestamps();
         });
     }

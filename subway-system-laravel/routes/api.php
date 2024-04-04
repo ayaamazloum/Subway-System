@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminBranchController;
 use App\Http\Controllers\Admin\AdminCoinRequestController;
 use App\Http\Controllers\Admin\AdminOverViewController;
+use App\Http\Controllers\Admin\AdminStationController;
 use App\Http\Controllers\Branch\BranchMessageController;
 use App\Http\Controllers\Branch\BranchReviewController;
 use App\Http\Controllers\Branch\BranchRideController;
@@ -68,6 +69,10 @@ Route::middleware('jwt.auth')->group(function () {
         Route::delete('branches/{id}', [AdminBranchController::class, 'destroy']);
         Route::post('email', [AdminBranchController::class, 'store']);
         Route::get('passenger_nearest_stations', [UserStationController::class, "passenger_nearest_stations"]);
+        Route::get('stations', [AdminStationController::class, 'index']);
+        Route::post('stations', [AdminStationController::class, 'store']);
+        Route::put('stations/{id}', [AdminStationController::class, 'update']);
+        Route::delete('stations/{id}', [AdminStationController::class, 'destroy']);
     });
 });
 
