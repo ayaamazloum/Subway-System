@@ -6,18 +6,13 @@ import "./style.css";
 import StationCard from "./components/StationCard"
 import Footer from "../../components/Footer";
 import NavBar from "../../components/Navbar";
+import { BeatLoader } from "react-spinners";
 
 const UserStation = () => {
-
     const [nearestStations, setNearestStations] = useState([]);
     const [highestRatingStations, setHighestRatingStations] = useState([]);
     const [allStations, setAllStations] = useState([]);
-
-    useEffect(() => {
-        fetchNearestStations();
-        fetchHighestRatingStations();
-        fetchAllStations();
-    }, []);
+    const [loading, setLoading] = useState(true);
 
     const fetchNearestStations = async () => {
         try {
@@ -46,13 +41,28 @@ const UserStation = () => {
             const response = await fetch("http://127.0.0.1:8000/api/view_stations");
             const data = await response.json();
             setAllStations(data.data);
-
         } catch (error) {
             console.error(error);
         }
+        setLoading(false);
     };
 
+    useEffect(() => {
+        fetchNearestStations();
+        fetchHighestRatingStations();
+        fetchAllStations();
+    }, []);
+
     return (
+        <>
+        {loading ? (
+            <BeatLoader
+              className="loader"
+              color={"#35b368"}
+              loading={loading}
+              size={50}
+            />
+          ) : (
         <div className="page light-bg flex column">
             <NavBar/>
             <div className="input-container white-bg">
@@ -61,25 +71,27 @@ const UserStation = () => {
             </div>
             <div className="padding">
                 <h2 className="padding-bottom">Nearest Stations</h2>
-                <div className="flex space-between">
+                <div className="flex center gap wrap">
                     {nearestStations.map(station => <StationCard key={station.id} station={station} />)}
                 </div>
                 
             </div>
             <div className="padding">
                 <h2 className="padding-bottom">Highest Rating Stations</h2>
-                <div className="flex space-between">
+                <div className="flex center wrap gap">
                     {highestRatingStations.map(station => <StationCard key={station.id} station={station} />)}
                 </div>
             </div>
             <div className="padding">
                 <h2 className="padding-bottom">All Stations</h2>
-                <div className="flex space-between">
+                <div className="flex center wrap gap">
                     {allStations.map(station => <StationCard key={station.id} station={station} />)}
                 </div>
             </div>
             <Footer/>
-        </div>
+        </div >
+        )}
+        </>
     )
 }
 

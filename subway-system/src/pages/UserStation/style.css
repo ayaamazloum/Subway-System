@@ -2,6 +2,8 @@
   position: relative;
   display: inline-block;
   margin: 20px;
+  width: 400px;
+  align-self: center;
 }
 
 .search-input {
@@ -13,8 +15,9 @@
 }
 
 .station-card {
-  width: fit-content;
-  padding: 50px;
+  height: 300px;
+  width: 350px;
+  padding: 20px;
 }
 
 .icons-div {

@@ -29,19 +29,19 @@ const StationCard = ( {station} ) => {
         }
     }
     return (
-    <div className="station-card white-bg semi-rounded flex column gap" >
+    <div className="station-card white-bg semi-rounded flex column center gap-40" >
         <div className="flex space-between gap">
             <p>{name}</p>
-            <div className="flex small-gap">
+            <div className="flex center gap-10">
                 <FontAwesomeIcon icon={faLocationDot} className="primary-text"/>
                 <p>{locationName}</p>
             </div>
-            <div className="flex">
+            <div className="flex center small-gap">
                 <p>{average_rating}</p>
                 <FontAwesomeIcon icon={faStar} className="primary-text"/>
             </div>
         </div>
-        <div className="flex small-gap">
+        <div className="flex center small-gap">
             <FontAwesomeIcon icon={faClock} className="primary-text"/>
             <p>{operating_hours}</p>
         </div>
@@ -52,7 +52,7 @@ const StationCard = ( {station} ) => {
             }}
             >View Rides</button>
         </div>
-        <div className="flex icons-div">
+        <div className="flex gap-40 icons-div">
             <FontAwesomeIcon icon={faRestroom} className="primary-text" />
             <FontAwesomeIcon icon={faWheelchair} className="primary-text"/>
             <FontAwesomeIcon icon={faWifi} className="primary-text"/>
