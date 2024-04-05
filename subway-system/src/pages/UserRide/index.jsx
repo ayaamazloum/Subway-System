@@ -11,6 +11,7 @@ import NavBar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { useLocation } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import Cookies from "universal-cookie";
 
 import "./style.css";
 
@@ -22,6 +23,8 @@ const UserRide = () => {
   const locationName = searchParams.get("locationName");
   const stationId = searchParams.get("id");
   const [rides, setRides] = useState([]);
+  const cookie = new Cookies();
+  const [islogged, setIsLogged] = useState(cookie.get("token"));
   const [loading, setLoading] = useState(true);
 
   const sendMessage = async () => {
@@ -86,23 +89,26 @@ const UserRide = () => {
               <h1>{locationName}</h1>
             </div>
           </div>
-          <div className="flex center gap-20">
-            <div className="message-input-container white-bg semi-rounded flex center">
-              <FontAwesomeIcon
-                icon={faMessage}
-                className="primary-text margin-left"
-              />
-              <input
-                onChange={(e) => setMessage(e.target.value)}
-                type="text"
-                placeholder="Have anything to tell us?"
-                className="message-input"
-              />
+          {islogged && (
+            <div className="flex center gap-20">
+              <div className="message-input-container white-bg semi-rounded flex center">
+                <FontAwesomeIcon
+                  icon={faMessage}
+                  className="primary-text margin-left"
+                />
+                <input
+                  onChange={(e) => setMessage(e.target.value)}
+                  type="text"
+                  placeholder="Have anything to tell us?"
+                  className="message-input"
+                />
+              </div>
+
+              <div className="button-div">
+                <button onClick={sendMessage}>Send</button>
+              </div>
             </div>
-            <div className="button-div">
-              <button onClick={sendMessage}>Send</button>
-            </div>
-          </div>
+          )}
           <div className="padding">
             <h3 className="padding-bottom">List of Rides</h3>
             <div className="flex center wrap padding gap-40">

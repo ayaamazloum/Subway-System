@@ -65,9 +65,9 @@ const Managers = () => {
       .then((response) => {
         if (response.data.status === "success") {
           closePopup();
-          setLoading(true);
           toast.success(response.data.message);
           getBranches();
+          setLoading(false);
         }
       })
       .finally(() => {
@@ -77,8 +77,8 @@ const Managers = () => {
   const handleAddSubmit = () => {
     const response = sendRequest(requestMehods.POST, "email", sentEmail)
       .then((response) => {
+        setLoading(true);
         if (response.data.status === "success") {
-          setLoading(true);
           closeAddPopup();
           toast.success(response.data.message);
           getBranches();

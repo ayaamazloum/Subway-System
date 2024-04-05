@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\Branch;
+use App\Models\Passenger;
 use App\Models\User;
 use App\Models\Station;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,7 @@ class PassengerMessageController extends Controller
     {
         $user_id = auth()->id();
         $user_name = User::where('id', $user_id)->first()->name;
+        $passenger_balance = Passenger::where('user_id', $user_id)->first()->wallet_balance;
         $passenger_messages = DB::table('messages')
             ->join('branches', 'messages.receiver_id', '=', 'branches.user_id')
             ->join('stations', 'branches.id', '=', 'stations.branch_id')
@@ -33,8 +35,9 @@ class PassengerMessageController extends Controller
             ->get();
 
         return response()->json([
-            'status' => 'success', 
+            'status' => 'success',
             'name' => $user_name,
+            'balance' => $passenger_balance,
             'passenger_messages' => $passenger_messages,
             'branch_replies' => $branch_replies
         ], 200);

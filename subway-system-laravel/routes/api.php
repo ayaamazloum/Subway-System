@@ -35,8 +35,8 @@ Route::middleware('jwt.auth')->group(function () {
         Route::delete('messages/{id}', [BranchMessageController::class, 'destroy']);
         Route::get('reviews', [BranchReviewController::class, 'index']);
         Route::delete('reviews/{id}', [BranchReviewController::class, 'destroy']);
-        Route::get('stations', [BranchStationController::class, 'index']);
-        Route::put('stations/{id}', [BranchStationController::class, 'update']);
+        Route::get('branchstations', [BranchStationController::class, 'index']);
+        Route::put('branchstations/{id}', [BranchStationController::class, 'update']);
         Route::get('rides', [BranchRideController::class, 'index']);
         Route::put('rides/{id}', [BranchRideController::class, 'update']);
         Route::post('logout', [UserController::class, 'logout']);

@@ -35,7 +35,7 @@ const Stations = () => {
   const handleSubmit = async () => {
     const response = await sendRequest(
       requestMehods.PUT,
-      `stations/${selectedStation.id}`,
+      `branchstations/${selectedStation.id}`,
       updateStation
     );
     setLoading(true);
@@ -53,7 +53,7 @@ const Stations = () => {
   };
 
   useEffect(() => {
-    sendRequest("GET", "stations").then((response) => {
+    sendRequest("GET", "branchstations").then((response) => {
       setStations(response.data.data);
       setLoading(false);
     });
@@ -62,6 +62,7 @@ const Stations = () => {
   return (
     <>
       <h1 className="p-relative fs-30">Stations</h1>
+      <chrts  na/>
       {loading ? (
         <BeatLoader
           className="loader"
